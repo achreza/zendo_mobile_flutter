@@ -1,20 +1,21 @@
 import 'package:get/get.dart';
+import 'package:zendo_mobile/app/data/models/user.dart';
+import 'package:zendo_mobile/app/data/services/auth_service.dart';
 
-class SplashController extends GetxController {
-  //TODO: Implement SplashController
-
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
-  }
+class SplashController extends GetxController with StateMixin<User> {
+  final AuthService authService = Get.find();
 
   @override
   void onReady() {
     super.onReady();
-  }
+    change(null, status: RxStatus.loading());
 
-  @override
-  void onClose() {}
-  void increment() => count.value++;
+    Future.delayed(Duration(seconds: 2), () async {
+      if (authService.isLoggedIn) {
+        Get.offAllNamed('/home');
+      } else {
+        Get.offAllNamed('/login');
+      }
+    });
+  }
 }

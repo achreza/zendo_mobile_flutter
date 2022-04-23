@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:zendo_mobile/app/data/services/auth_service.dart';
 
 class LoginController extends GetxController {
   final RxBool isSubmit = false.obs;
@@ -9,14 +10,12 @@ class LoginController extends GetxController {
   final RxString phoneNumber = ''.obs;
   final RxString password = ''.obs;
 
+  final AuthService authService = Get.find();
+
   void login() {
     // form validation success
     if (formKey.currentState!.validate()) {
-      // TODO: do login
-      Get.showSnackbar(GetSnackBar(
-        message: 'Login Success',
-        duration: Duration(seconds: 2),
-      ));
+      authService.login(phoneNumber.value, password.value);
     }
   }
 }
