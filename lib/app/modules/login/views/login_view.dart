@@ -50,13 +50,15 @@ class LoginView extends GetView<LoginController> {
               ),
 
               // Login Button
-              Container(
-                margin: EdgeInsets.all(kDefaultMargin),
-                height: 40,
-                width: double.infinity,
-                child: ElevatedButton(
-                  child: Text('Login'),
-                  onPressed: controller.login,
+              Obx(
+                () => Container(
+                  margin: EdgeInsets.all(kDefaultMargin),
+                  height: 40,
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    child: Text('Login'),
+                    onPressed: !controller.isSubmit.value ? controller.login : null,
+                  ),
                 ),
               ),
             ],

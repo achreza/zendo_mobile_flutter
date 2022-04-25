@@ -12,10 +12,20 @@ class LoginController extends GetxController {
 
   final AuthService authService = Get.find();
 
-  void login() {
-    // form validation success
+  void login() async {
     if (formKey.currentState!.validate()) {
-      authService.login(phoneNumber.value, password.value);
+      isSubmit.value = true;
+
+      try {
+        await authService.login(phoneNumber.value, password.value);
+        Get.offAllNamed('/home');
+      } catch (e) {
+        isSubmit.value = false;
+        Get.showSnackbar(GetSnackBar(
+          message: e.toString().replaceAll('Exception: ', ''),
+          duration: Duration(seconds: 3),
+        ));
+      }
     }
   }
 }
