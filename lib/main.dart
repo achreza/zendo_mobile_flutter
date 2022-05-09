@@ -34,6 +34,7 @@ DevicePreview mainApp() {
           title: "Zendo",
           initialRoute: AppPages.INITIAL,
           getPages: AppPages.routes,
+          themeMode: ThemeMode.light,
         );
       },
     ),
