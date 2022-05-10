@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:wc_form_validators/wc_form_validators.dart';
+import 'package:zendo_mobile/app/components/alerts/ErrorAlert.dart';
 import 'package:zendo_mobile/app/core/values/constants.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -40,6 +41,16 @@ class LoginView extends GetView<LoginController> {
                               Text('Masuk', style: TextStyle(fontSize: 36.sp, fontWeight: FontWeight.w500)),
                         ),
                         SizedBox(height: 20.h),
+
+                        // Error Alert
+                        Obx(
+                          () => controller.errorMessage.value.isNotEmpty
+                              ? Container(
+                                  margin: EdgeInsets.only(bottom: 20.h),
+                                  child: ErrorAlert(message: controller.errorMessage.value),
+                                )
+                              : Container(),
+                        ),
 
                         // Phone Input Field
                         Padding(
