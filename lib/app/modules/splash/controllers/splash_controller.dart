@@ -9,12 +9,12 @@ class SplashController extends GetxController with StateMixin<User> {
   void onReady() {
     super.onReady();
 
-    Future.delayed(Duration(seconds: 2), () async {
-      if (authService.isLoggedIn) {
-        Get.offAllNamed('/home');
-      } else {
-        Get.offAllNamed('/login');
-      }
-    });
+    // Future.delayed(Duration(seconds: 2), () async {
+    //   if (authService.isLoggedIn) {
+    //     Get.offAllNamed('/home');
+    //   } else {
+    //     Get.offAllNamed('/login');
+    //   }
+    // });
   }
 }

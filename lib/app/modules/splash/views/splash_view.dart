@@ -6,8 +6,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class SplashView extends GetView<SplashController> {
   @override
   Widget build(BuildContext context) {
-    controller.onReady();
-
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.end,
