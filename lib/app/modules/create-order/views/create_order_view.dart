@@ -140,6 +140,7 @@ class CreateOrderView extends GetView<CreateOrderController> {
                       SizedBox(height: inputSpace),
                       ListView(
                         shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
                         children: [
                           Container(
                             decoration: BoxDecoration(
@@ -170,6 +171,7 @@ class CreateOrderView extends GetView<CreateOrderController> {
                                     ),
                                     SizedBox(height: 5.h),
                                     Row(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
                                       children: [
                                         FaIcon(
                                           FontAwesomeIcons.moneyBill1Wave,
@@ -219,6 +221,7 @@ class CreateOrderView extends GetView<CreateOrderController> {
                           padding: EdgeInsets.symmetric(vertical: 16.h),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Icon(Icons.add_circle),
                               SizedBox(width: 10.w),
@@ -230,16 +233,57 @@ class CreateOrderView extends GetView<CreateOrderController> {
                       SizedBox(height: inputSpace),
                       ListView(
                         shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
                         children: [
                           ListTile(
                             contentPadding: EdgeInsets.symmetric(vertical: kDefaultMargin),
-                            leading: Icon(Icons.location_on),
-                            trailing: IconButton(
-                              icon: Icon(Icons.close),
-                              onPressed: () {},
+                            trailing: IconButton(icon: Icon(Icons.close), onPressed: () {}),
+                            title: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                FaIcon(FontAwesomeIcons.mapLocation, size: 17.w),
+                                SizedBox(width: 10.w),
+                                Expanded(
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      border: Border(
+                                        bottom: BorderSide(
+                                          color: Colors.grey.shade300,
+                                        ),
+                                      ),
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        SizedBox(height: 10.h),
+                                        Text(
+                                          'Jl. Raya Cikampek No. 1',
+                                          style: TextStyle(
+                                            fontSize: 14.sp,
+                                            fontWeight: FontWeight.w700,
+                                          ),
+                                        ),
+                                        SizedBox(height: 5.h),
+                                        Row(
+                                          children: [
+                                            Icon(Icons.list_alt, size: 10.w),
+                                            SizedBox(width: 5.w),
+                                            Text(
+                                              'Beli Popok',
+                                              style: TextStyle(
+                                                fontSize: 12.sp,
+                                                fontWeight: FontWeight.w400,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(height: 10.h),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
-                            title: Text('Indomaret Sembung'),
-                            subtitle: Text('Beli Bawang'),
                           ),
                         ],
                       ),
