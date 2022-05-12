@@ -28,84 +28,173 @@ class ProfileView extends GetView<HomeController> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Achmad Fahreza",style: TextStyle(fontSize: 24,fontWeight: FontWeight.w500)),
-                      Text("+62983232322",style: TextStyle(fontSize: 14,))
+                      Text("Achmad Fahreza",
+                          style: TextStyle(
+                              fontSize: 24, fontWeight: FontWeight.w500)),
+                      Text("+62983232322",
+                          style: TextStyle(
+                            fontSize: 14,
+                          ))
                     ],
                   ),
                 )
               ],
             ),
           ),
-          Container(margin: EdgeInsets.only(left: 32,bottom: 6),child: Text("Hasil anda hari ini :",style: TextStyle(fontSize: 20,fontWeight: FontWeight.w400),)),
+          Container(
+              margin: EdgeInsets.only(left: 32, bottom: 6),
+              child: Text(
+                "Hasil anda hari ini :",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
+              )),
           Container(
             height: 72,
-            decoration: BoxDecoration(
-              color: Colors.black
-            ),
+            decoration: BoxDecoration(color: Colors.black),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("5",style: TextStyle(fontSize: 20,fontWeight: FontWeight.w400,color: Colors.white),),
-                    Text("Order",style: TextStyle(fontSize: 14,fontWeight: FontWeight.w300,color: Colors.white),),
+                    Text(
+                      "5",
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.white),
+                    ),
+                    Text(
+                      "Order",
+                      style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w300,
+                          color: Colors.white),
+                    ),
                   ],
                 ),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("15.000",style: TextStyle(fontSize: 20,fontWeight: FontWeight.w400,color: Colors.white),),
-                    Text("Omzet",style: TextStyle(fontSize: 14,fontWeight: FontWeight.w300,color: Colors.white),),
+                    Text(
+                      "15.000",
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.white),
+                    ),
+                    Text(
+                      "Omzet",
+                      style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w300,
+                          color: Colors.white),
+                    ),
                   ],
                 ),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("12.000",style: TextStyle(fontSize: 20,fontWeight: FontWeight.w400,color: Colors.green),),
-                    Text("Untuk Driver",style: TextStyle(fontSize: 14,fontWeight: FontWeight.w300,color: Colors.white),),
+                    Text(
+                      "12.000",
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.green),
+                    ),
+                    Text(
+                      "Untuk Driver",
+                      style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w300,
+                          color: Colors.white),
+                    ),
                   ],
                 ),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("3.000",style: TextStyle(fontSize: 20,fontWeight: FontWeight.w400,color: Colors.yellow),),
-                    Text("Setoran",style: TextStyle(fontSize: 14,fontWeight: FontWeight.w300,color: Colors.white),),
+                    Text(
+                      "3.000",
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.yellow),
+                    ),
+                    Text(
+                      "Setoran",
+                      style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w300,
+                          color: Colors.white),
+                    ),
                   ],
                 ),
               ],
             ),
           ),
           Container(
-            margin: EdgeInsets.only(left: 15,top: 28),
+            margin: EdgeInsets.only(left: 15, top: 28),
             child: Row(
               children: [
-                Container(margin: EdgeInsets.only(right: 10),child: Icon(Icons.history,size: 22,color: Colors.grey,)),
-                Text("Riwayat Order",style: TextStyle(fontSize: 18),)
+                Container(
+                    margin: EdgeInsets.only(right: 10),
+                    child: Icon(
+                      Icons.history,
+                      size: 22,
+                      color: Colors.grey,
+                    )),
+                Text(
+                  "Riwayat Order",
+                  style: TextStyle(fontSize: 18),
+                )
               ],
             ),
           ),
-          Container(margin: EdgeInsets.only(left: 15,right: 15,top: 10),child: Divider(thickness: 2)),
           Container(
-            margin: EdgeInsets.only(left: 15,top: 16),
-            child: Row(
-              children: [
-                Container(margin: EdgeInsets.only(right: 10),child: Icon(Icons.headphones,size: 22,color: Colors.grey,)),
-                Text("Hubungi Admin",style: TextStyle(fontSize: 18),)
-              ],
-            ),
-          ),
-          Container(margin: EdgeInsets.only(left: 15,right: 15,top: 10),child: Divider(thickness: 2)),
+              margin: EdgeInsets.only(left: 15, right: 15, top: 10),
+              child: Divider(thickness: 2)),
           Container(
-            margin: EdgeInsets.only(left: 15,top: 16),
+            margin: EdgeInsets.only(left: 15, top: 16),
             child: Row(
               children: [
-                Container(margin: EdgeInsets.only(right: 10),child: Icon(Icons.logout,size: 22,color: Colors.grey,)),
-                Text("Keluar",style: TextStyle(fontSize: 18),)
+                Container(
+                    margin: EdgeInsets.only(right: 10),
+                    child: Icon(
+                      Icons.headphones,
+                      size: 22,
+                      color: Colors.grey,
+                    )),
+                Text(
+                  "Hubungi Admin",
+                  style: TextStyle(fontSize: 18),
+                )
               ],
             ),
           ),
-          Container(margin: EdgeInsets.only(left: 15,right: 15,top: 10),child: Divider(thickness: 2)),
+          Container(
+              margin: EdgeInsets.only(left: 15, right: 15, top: 10),
+              child: Divider(thickness: 2)),
+          Container(
+            margin: EdgeInsets.only(left: 15, top: 16),
+            child: Row(
+              children: [
+                Container(
+                    margin: EdgeInsets.only(right: 10),
+                    child: Icon(
+                      Icons.logout,
+                      size: 22,
+                      color: Colors.grey,
+                    )),
+                Text(
+                  "Keluar",
+                  style: TextStyle(fontSize: 18),
+                )
+              ],
+            ),
+          ),
+          Container(
+              margin: EdgeInsets.only(left: 15, right: 15, top: 10),
+              child: Divider(thickness: 2)),
         ],
       ),
     );
