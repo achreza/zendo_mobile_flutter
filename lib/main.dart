@@ -23,7 +23,7 @@ DevicePreview mainApp() {
   return DevicePreview(
     enabled: true,
     builder: (_) => ScreenUtilInit(
-      designSize: Size(418, 823),
+      designSize: Size(394, 916),
       builder: (_) {
         // Set Orientation
         SystemChrome.setPreferredOrientations([

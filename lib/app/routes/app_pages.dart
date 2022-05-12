@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import 'package:zendo_mobile/app/modules/create-order/bindings/create_order_binding.dart';
+import 'package:zendo_mobile/app/modules/create-order/views/create_order_view.dart';
 import 'package:zendo_mobile/app/modules/home/bindings/home_binding.dart';
 import 'package:zendo_mobile/app/modules/home/views/home_view.dart';
 import 'package:zendo_mobile/app/modules/login/bindings/login_binding.dart';
@@ -14,7 +16,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.SPLASH;
+  static const INITIAL = Routes.CREATE_ORDER;
 
   static final routes = [
     GetPage(
@@ -31,6 +33,11 @@ class AppPages {
       name: _Paths.HOME,
       page: () => HomeView(),
       binding: HomeBinding(),
+    ),
+    GetPage(
+      name: _Paths.CREATE_ORDER,
+      page: () => CreateOrderView(),
+      binding: CreateOrderBinding(),
     ),
   ];
 }
