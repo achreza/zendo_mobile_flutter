@@ -12,6 +12,7 @@ class DetailOrderCompleteView extends GetView<DetailOrderController> {
         backgroundColor: Colors.black,
         title: Text("Detail Order"),
         centerTitle: true,
+        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.file_upload))],
       ),
       body: Container(
           margin: EdgeInsets.only(left: 16, top: 11, right: 16, bottom: 20).r,
