@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
 import 'package:zendo_mobile/app/modules/home/bindings/home_binding.dart';
-import 'package:zendo_mobile/app/modules/home/views/home_view.dart';
+import 'package:zendo_mobile/app/modules/home/views/home_tab_view.dart';
 import 'package:zendo_mobile/app/modules/login/bindings/login_binding.dart';
 import 'package:zendo_mobile/app/modules/login/views/login_view.dart';
 import 'package:zendo_mobile/app/modules/splash/bindings/splash_binding.dart';
@@ -14,7 +14,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.SPLASH;
+  static const INITIAL = Routes.HOME;
 
   static final routes = [
     GetPage(
@@ -29,7 +29,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.HOME,
-      page: () => HomeView(),
+      page: () => HomeTabView(),
       binding: HomeBinding(),
     ),
   ];
