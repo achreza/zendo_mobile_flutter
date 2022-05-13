@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:get/get.dart';
 import 'package:zendo_mobile/app/components/cards/destination_card.dart';
@@ -127,7 +126,7 @@ class CreateOrderView extends GetView<CreateOrderController> {
                         style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all(Colors.grey.shade300),
                         ),
-                        onPressed: () {},
+                        onPressed: controller.onAddFeePress,
                         child: Padding(
                           padding: EdgeInsets.symmetric(vertical: 16.h),
                           child: Row(
@@ -168,7 +167,7 @@ class CreateOrderView extends GetView<CreateOrderController> {
                         style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all(Colors.grey.shade300),
                         ),
-                        onPressed: () {},
+                        onPressed: controller.onDestinationPress,
                         child: Padding(
                           padding: EdgeInsets.symmetric(vertical: 16.h),
                           child: Row(
