@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:wc_form_validators/wc_form_validators.dart';
-import 'package:zendo_mobile/app/components/alerts/ErrorAlert.dart';
+import 'package:zendo_mobile/app/components/alerts/error_alert.dart';
 import 'package:zendo_mobile/app/core/values/constants.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -123,7 +123,7 @@ class LoginView extends GetView<LoginController> {
                         Obx(
                           () => Container(
                             margin: EdgeInsets.symmetric(horizontal: kDefaultMargin * 3),
-                            height: 50,
+                            height: 50.h,
                             width: double.infinity,
                             child: ElevatedButton(
                               child: Text('Masuk'),

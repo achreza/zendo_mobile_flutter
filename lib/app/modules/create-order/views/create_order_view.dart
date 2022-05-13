@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:get/get.dart';
+import 'package:zendo_mobile/app/components/cards/destination_card.dart';
+import 'package:zendo_mobile/app/components/cards/fee_card.dart';
 import 'package:zendo_mobile/app/core/values/constants.dart';
 
 import '../controllers/create_order_controller.dart';
@@ -28,6 +30,7 @@ class CreateOrderView extends GetView<CreateOrderController> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                // Title
                 Text(
                   'Buat Order',
                   style: TextStyle(
@@ -138,66 +141,15 @@ class CreateOrderView extends GetView<CreateOrderController> {
                         ),
                       ),
                       SizedBox(height: inputSpace),
-                      ListView(
+                      ListView.builder(
                         shrinkWrap: true,
                         physics: NeverScrollableScrollPhysics(),
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              border: Border(
-                                bottom: BorderSide(
-                                  color: Colors.grey.shade300,
-                                ),
-                              ),
-                            ),
-                            child: ListTile(
-                              contentPadding: EdgeInsets.symmetric(
-                                vertical: kDefaultMargin,
-                              ),
-                              trailing: IconButton(
-                                icon: Icon(Icons.close),
-                                onPressed: () {},
-                              ),
-                              title: Container(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Cancel Fee',
-                                      style: TextStyle(
-                                        fontSize: 14.sp,
-                                        fontWeight: FontWeight.w700,
-                                      ),
-                                    ),
-                                    SizedBox(height: 5.h),
-                                    Row(
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      children: [
-                                        FaIcon(
-                                          FontAwesomeIcons.moneyBill1Wave,
-                                          size: 17.w,
-                                        ),
-                                        SizedBox(width: 10.w),
-                                        Text(
-                                          'Rp. 5.000',
-                                          style: TextStyle(
-                                            fontSize: 12.sp,
-                                            fontWeight: FontWeight.w400,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
+                        itemCount: 2,
+                        itemBuilder: (context, index) => FeeCard(),
                       ),
                     ],
                   ),
                 ),
-
                 // Field: Tujuan Order
                 Container(
                   margin: EdgeInsets.only(bottom: 24.h),
@@ -231,63 +183,22 @@ class CreateOrderView extends GetView<CreateOrderController> {
                         ),
                       ),
                       SizedBox(height: inputSpace),
-                      ListView(
+                      ListView.builder(
                         shrinkWrap: true,
                         physics: NeverScrollableScrollPhysics(),
-                        children: [
-                          ListTile(
-                            contentPadding: EdgeInsets.symmetric(vertical: kDefaultMargin),
-                            trailing: IconButton(icon: Icon(Icons.close), onPressed: () {}),
-                            title: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                FaIcon(FontAwesomeIcons.mapLocation, size: 17.w),
-                                SizedBox(width: 10.w),
-                                Expanded(
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      border: Border(
-                                        bottom: BorderSide(
-                                          color: Colors.grey.shade300,
-                                        ),
-                                      ),
-                                    ),
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        SizedBox(height: 10.h),
-                                        Text(
-                                          'Jl. Raya Cikampek No. 1',
-                                          style: TextStyle(
-                                            fontSize: 14.sp,
-                                            fontWeight: FontWeight.w700,
-                                          ),
-                                        ),
-                                        SizedBox(height: 5.h),
-                                        Row(
-                                          children: [
-                                            Icon(Icons.list_alt, size: 10.w),
-                                            SizedBox(width: 5.w),
-                                            Text(
-                                              'Beli Popok',
-                                              style: TextStyle(
-                                                fontSize: 12.sp,
-                                                fontWeight: FontWeight.w400,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        SizedBox(height: 10.h),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
+                        itemCount: 2,
+                        itemBuilder: (context, index) => DestinationCard(),
                       ),
                     ],
+                  ),
+                ),
+                // Submit Button
+                Container(
+                  height: 50.h,
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    child: Text('Simpan Order'),
+                    onPressed: () {},
                   ),
                 ),
               ],
