@@ -11,6 +11,8 @@ import 'package:zendo_mobile/app/modules/home/bindings/home_binding.dart';
 import 'package:zendo_mobile/app/modules/home/views/home_tab_view.dart';
 import 'package:zendo_mobile/app/modules/login/bindings/login_binding.dart';
 import 'package:zendo_mobile/app/modules/login/views/login_view.dart';
+import 'package:zendo_mobile/app/modules/riwayat-order/bindings/riwayat_order_binding.dart';
+import 'package:zendo_mobile/app/modules/riwayat-order/views/riwayat_order_view.dart';
 import 'package:zendo_mobile/app/modules/splash/bindings/splash_binding.dart';
 import 'package:zendo_mobile/app/modules/splash/views/splash_view.dart';
 
@@ -21,7 +23,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.HOME;
+  static const INITIAL = Routes.RIWAYAT_ORDER;
 
   static final routes = [
     GetPage(
@@ -58,6 +60,11 @@ class AppPages {
       name: _Paths.CHANGE_ORDER,
       page: () => ChangeOrderView(),
       binding: ChangeOrderBinding(),
+    ),
+    GetPage(
+      name: _Paths.RIWAYAT_ORDER,
+      page: () => RiwayatOrderView(),
+      binding: RiwayatOrderBinding(),
     ),
   ];
 }
