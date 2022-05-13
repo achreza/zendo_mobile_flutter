@@ -9,10 +9,14 @@ abstract class Routes {
   static const SPLASH = _Paths.SPLASH;
   static const LOGIN = _Paths.LOGIN;
   static const HOME = _Paths.HOME;
+  static const DETAIL_ORDER = _Paths.DETAIL_ORDER;
+  static const DETAIL_ORDER_COMPLETE = _Paths.DETAIL_ORDER_COMPLETE;
 }
 
 abstract class _Paths {
   static const SPLASH = '/splash';
   static const LOGIN = '/login';
   static const HOME = '/home';
+  static const DETAIL_ORDER = '/detail-order';
+  static const DETAIL_ORDER_COMPLETE = '/detail-order/complete';
 }
