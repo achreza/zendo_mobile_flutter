@@ -9,15 +9,13 @@ class HomeTabView extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Image.asset(
-          'assets/images/logo-splash.png',
-          scale: 2,
-        ),
+        title: Image.asset('assets/images/logo-splash.png', scale: 2),
         centerTitle: true,
         backgroundColor: Colors.black,
       ),
       body: TabBarView(
         controller: controller.tabController,
+        physics: NeverScrollableScrollPhysics(),
         children: controller.pages,
       ),
       bottomNavigationBar: Obx(
