@@ -7,6 +7,7 @@ import 'package:zendo_mobile/app/modules/home/controllers/home_controller.dart';
 class ProfileView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
+    print("build profile view");
     return Scaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

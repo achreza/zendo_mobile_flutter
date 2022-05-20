@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -11,9 +13,15 @@ import '../controllers/home_controller.dart';
 class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
+    controller.fetchOngoingOrders();
+
     return Scaffold(
       body: Obx(
-        () => controller.orders.isEmpty ? _EmptyState() : _NotEmptyState(),
+        () => controller.isFetchingOrder.isTrue
+            ? _LoadingState()
+            : controller.orders.isEmpty
+                ? _EmptyState()
+                : _NotEmptyState(),
       ),
       floatingActionButton: Obx(
         () => controller.orders.isNotEmpty
@@ -86,6 +94,27 @@ class _EmptyState extends StatelessWidget {
                 AddOrderButton(onTap: controller.navigateToCreateOrder),
               ],
             ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _LoadingState extends StatelessWidget {
+  _LoadingState({Key? key}) : super(key: key);
+
+  final HomeController controller = Get.find();
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _PageTitle(),
+        Expanded(
+          child: Center(
+            child: CircularProgressIndicator(),
           ),
         ),
       ],
