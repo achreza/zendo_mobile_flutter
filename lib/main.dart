@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:intl/intl.dart';
 import 'package:zendo_mobile/app/core/theme/light_theme.dart';
 import 'package:zendo_mobile/app/data/models/user_credential.dart';
 import 'package:zendo_mobile/app/data/services/db_service.dart';
@@ -15,6 +16,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initHive();
   await initServices();
+  Intl.defaultLocale = 'id_ID';
 
   runApp(mainApp());
 }

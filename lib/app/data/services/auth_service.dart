@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/status/http_status.dart';
 import 'package:zendo_mobile/app/data/dto/response/login_response.dart';
@@ -21,6 +23,8 @@ class AuthService extends GetxService {
 
     switch (response.statusCode) {
       case HttpStatus.badRequest:
+        throw Exception('Kredensial tidak valid');
+      case HttpStatus.unprocessableEntity:
         throw Exception('Kredensial tidak valid');
       case null:
         throw Exception('Gagal menghubungkan ke server');
