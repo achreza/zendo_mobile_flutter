@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:zendo_mobile/app/data/models/order_model.dart';
+import 'package:zendo_mobile/app/data/models/order.dart';
 
 import '../../core/values/constants.dart';
 import '../cards/order_card.dart';
@@ -18,6 +18,7 @@ class OrderList extends StatelessWidget {
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
       itemCount: data.length,
+      reverse: true,
       itemBuilder: (context, index) => OrderCard(data: data[index]),
       separatorBuilder: (context, index) => SizedBox(height: kDefaultMargin),
     );

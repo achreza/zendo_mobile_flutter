@@ -4,7 +4,7 @@ class TextUtil {
   static String toRupiah(int value) {
     final formatter = NumberFormat.currency(
       locale: 'id_ID',
-      symbol: 'Rp ',
+      symbol: 'Rp. ',
       decimalDigits: 0,
     );
     return formatter.format(value);

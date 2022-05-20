@@ -1,4 +1,4 @@
-import '../../models/order_model.dart';
+import '../../models/order.dart';
 
 class ListOrderResponse {
   final bool success;

@@ -4,7 +4,7 @@ import 'package:zendo_mobile/app/core/utils/text.dart';
 import '../../core/values/constants.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../data/models/order_model.dart';
+import '../../data/models/order.dart';
 
 class OrderCard extends StatelessWidget {
   const OrderCard({

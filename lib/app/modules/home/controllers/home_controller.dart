@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:zendo_mobile/app/data/models/order_model.dart';
+import 'package:zendo_mobile/app/data/models/order.dart';
 import 'package:zendo_mobile/app/data/services/order_service.dart';
 import 'package:zendo_mobile/app/modules/home/views/home_view.dart';
 import 'package:zendo_mobile/app/modules/home/views/profile_view.dart';
