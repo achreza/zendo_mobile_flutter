@@ -6,7 +6,6 @@ import 'dart:async' as _i4;
 
 import 'package:get/get.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:zendo_mobile/app/data/models/user.dart' as _i5;
 import 'package:zendo_mobile/app/data/services/db_service.dart' as _i3;
 
 // ignore_for_file: type=lint
@@ -56,7 +55,7 @@ class MockDbService extends _i1.Mock implements _i3.DbService {
               returnValue: Future<_i3.DbService>.value(_FakeDbService_1()))
           as _i4.Future<_i3.DbService>);
   @override
-  _i4.Future<void> saveUser(_i5.User? user) =>
+  _i4.Future<void> saveUser(dynamic user) =>
       (super.noSuchMethod(Invocation.method(#saveUser, [user]),
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);

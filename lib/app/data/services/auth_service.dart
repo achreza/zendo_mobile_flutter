@@ -1,9 +1,7 @@
-import 'dart:developer';
-
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/status/http_status.dart';
 import 'package:zendo_mobile/app/data/dto/response/login_response.dart';
-import 'package:zendo_mobile/app/data/models/user.dart';
+import 'package:zendo_mobile/app/data/models/user_credential.dart';
 import 'package:zendo_mobile/app/data/providers/auth_provider.dart';
 import 'package:zendo_mobile/app/data/services/db_service.dart';
 
@@ -15,7 +13,7 @@ class AuthService extends GetxService {
 
   Future<AuthService> init() async => this;
 
-  get isLoggedIn => dbService.getUser() != null && dbService.getAuthToken() != null;
+  get isLoggedIn => dbService.getUserCredential() != null && dbService.getAuthToken() != null;
 
   Future<void> login(String phoneNumber, String password) async {
     final request = LoginRequest(phone_number: phoneNumber, password: password);
@@ -32,11 +30,11 @@ class AuthService extends GetxService {
     final LoginResponse loginResponse = LoginResponse.fromJson(response.body);
     final data = loginResponse.data;
 
-    final user = User(name: data.phone_number, phoneNumber: data.phone_number);
+    final user = UserCredential(phoneNumber: data.phone_number, token: data.token);
     final token = data.token;
 
     await Future.wait([
-      dbService.saveUser(user),
+      dbService.saveUserCredential(user),
       dbService.saveAuthToken(token),
     ]);
   }
