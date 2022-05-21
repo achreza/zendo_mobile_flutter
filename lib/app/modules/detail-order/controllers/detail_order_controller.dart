@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:wc_form_validators/wc_form_validators.dart';
 import 'package:zendo_mobile/app/core/utils/snackbar.dart';
+import 'package:zendo_mobile/app/core/utils/toast.dart';
 import 'package:zendo_mobile/app/data/dto/request/update_order_request.dart';
 import 'package:zendo_mobile/app/data/models/order.dart';
 import 'package:zendo_mobile/app/data/services/order_service.dart';
@@ -111,6 +112,7 @@ class DetailOrderController extends GetxController with StateMixin {
                         Get.back();
                         fetchDetailOrder(data.value!.id!);
                         homeController.fetchOngoingOrders();
+                        ToastUtil.showDefault("Biaya tujuan berhasil diubah");
                       }
                     },
                     child: Text(
@@ -150,6 +152,7 @@ class DetailOrderController extends GetxController with StateMixin {
           homeController.fetchOngoingOrders();
           Get.back();
           Timer(Duration(milliseconds: 400), () => Get.back());
+          ToastUtil.showDefault("Pesanan berhasil dibatalkan");
         } catch (e) {
           SnackbarUtil.showError(e.toString().replaceAll('Exception: ', ''));
         }
@@ -169,6 +172,7 @@ class DetailOrderController extends GetxController with StateMixin {
           homeController.fetchOngoingOrders();
           Get.back();
           Timer(Duration(milliseconds: 400), () => Get.back());
+          ToastUtil.showDefault("Pesanan telah selesai");
         } catch (e) {
           SnackbarUtil.showError(e.toString().replaceAll('Exception: ', ''));
         }
