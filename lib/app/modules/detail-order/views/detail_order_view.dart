@@ -137,7 +137,7 @@ class _OngoingOrderState extends StatelessWidget {
                     primary: Colors.red,
                     minimumSize: const Size.fromHeight(45),
                   ),
-                  onPressed: () {},
+                  onPressed: () => _controller.onCompletePress(),
                   child: Text(
                     "Selesai",
                     style: TextStyle(color: Colors.white, fontSize: 15.sp, fontWeight: FontWeight.bold),

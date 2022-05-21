@@ -157,6 +157,25 @@ class DetailOrderController extends GetxController with StateMixin {
     );
   }
 
+  void onCompletePress() {
+    Get.defaultDialog(
+      title: "Selesai Pesanan",
+      content: Text("Apakah anda yakin ingin menyelesaikan pesanan ini?"),
+      textConfirm: "Ya",
+      textCancel: "Tidak",
+      onConfirm: () async {
+        try {
+          await orderService.completeOrder(data.value!.id!);
+          homeController.fetchOngoingOrders();
+          Get.back();
+          Timer(Duration(milliseconds: 400), () => Get.back());
+        } catch (e) {
+          SnackbarUtil.showError(e.toString().replaceAll('Exception: ', ''));
+        }
+      },
+    );
+  }
+
   @override
   void onInit() {
     super.onInit();

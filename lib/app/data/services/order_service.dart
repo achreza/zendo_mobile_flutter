@@ -56,6 +56,20 @@ class OrderService extends GetxService {
     }
   }
 
+  Future<void> completeOrder(int id) async {
+    final response = await orderProvider.complete(id);
+
+    switch (response.statusCode) {
+      case HttpStatus.badRequest:
+        throw Exception('Gagal menyelesaikan order');
+      case HttpStatus.unprocessableEntity:
+        throw Exception('Gagal menyelesaikan order');
+      case null:
+        throw Exception('Gagal menghubungkan ke server');
+      default:
+    }
+  }
+
   Future<List<Order>> getOngoingOrders() async {
     final response = await orderProvider.getOngoingOrders();
     final ListOrderResponse orderResponse = ListOrderResponse.fromJson(response.body);
