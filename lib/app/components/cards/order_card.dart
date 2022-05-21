@@ -28,7 +28,7 @@ class OrderCard extends StatelessWidget {
       margin: EdgeInsets.symmetric(horizontal: kDefaultMargin * 3),
       child: InkWell(
         onTap: () {
-          Get.toNamed(Routes.DETAIL_ORDER, arguments: data);
+          Get.toNamed(Routes.DETAIL_ORDER, arguments: data.id);
         },
         child: Container(
           padding: EdgeInsets.symmetric(

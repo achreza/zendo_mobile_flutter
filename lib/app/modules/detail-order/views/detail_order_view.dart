@@ -10,41 +10,47 @@ import '../controllers/detail_order_controller.dart';
 class DetailOrderView extends GetView<DetailOrderController> {
   @override
   Widget build(BuildContext context) {
+    controller.onInit();
     return Scaffold(
       appBar: AppBar(
         title: Text("Detail Order"),
         centerTitle: true,
       ),
-      body: Container(
-        margin: EdgeInsets.symmetric(
-          horizontal: kDefaultPadding * 2,
-          vertical: kDefaultPadding * 3,
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Contents
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _TitleSection(),
-                    _CustomerInfoSection(),
-                    _ListDestinationSection(),
-                    _DefaultCostSection(),
-                    _AdditionalCostSection(),
-                  ],
+      body: controller.obx(
+        (_) => Container(
+          margin: EdgeInsets.symmetric(
+            horizontal: kDefaultPadding * 2,
+            vertical: kDefaultPadding * 3,
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Contents
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _TitleSection(),
+                      _CustomerInfoSection(),
+                      _ListDestinationSection(),
+                      _DefaultCostSection(),
+                      _AdditionalCostSection(),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            // Buttons
-            Obx(
-              () => controller.data.value.status == "on-going" ? _OngoingOrderState() : _CompleteOrderState(),
-            ),
-          ],
+              // Buttons
+              Obx(
+                () => controller.data.value!.status == "on-going"
+                    ? _OngoingOrderState()
+                    : _CompleteOrderState(),
+              ),
+            ],
+          ),
         ),
+        onLoading: Center(child: CircularProgressIndicator()),
       ),
     );
   }
@@ -162,20 +168,20 @@ class _AdditionalCostSection extends StatelessWidget {
           SizedBox(height: 5.h),
           ListView.builder(
             shrinkWrap: true,
-            itemCount: _controller.data.value.additionalFees!.length,
+            itemCount: _controller.data.value?.additionalFees?.length,
             itemBuilder: (ctx, idx) => Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Padding(
                   padding: EdgeInsets.only(left: kDefaultPadding * 2),
                   child: Text(
-                    _controller.data.value.additionalFees![idx].note!,
+                    _controller.data.value!.additionalFees![idx].note!,
                     style: TextStyle(fontSize: 15.sp),
                   ),
                 ),
                 Text(
                   TextUtil.toRupiah(
-                    _controller.data.value.additionalFees![idx].expenses!,
+                    _controller.data.value!.additionalFees![idx].expenses!,
                   ),
                   style: TextStyle(
                     fontSize: 14.sp,
@@ -197,7 +203,7 @@ class _AdditionalCostSection extends StatelessWidget {
                 ),
               ),
               Text(
-                TextUtil.toRupiah(_controller.data.value.totalFee!),
+                TextUtil.toRupiah(_controller.data.value!.totalFee!),
                 style: TextStyle(
                   fontSize: 14.sp,
                   fontWeight: FontWeight.bold,
@@ -229,7 +235,7 @@ class _DefaultCostSection extends StatelessWidget {
               Text("Ongkos Pengeluaran", style: TextStyle(fontSize: 15.sp)),
               Text(
                 TextUtil.toRupiah(
-                  _controller.data.value.destinations!
+                  _controller.data.value!.destinations!
                       .map<int>((e) => e.expenses!)
                       .reduce((value, element) => value + element),
                 ),
@@ -249,7 +255,7 @@ class _DefaultCostSection extends StatelessWidget {
                 style: TextStyle(fontSize: 15.sp),
               ),
               Text(
-                TextUtil.toRupiah(_controller.data.value.deliveryFee!),
+                TextUtil.toRupiah(_controller.data.value!.deliveryFee!),
                 style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold),
               )
             ],
@@ -280,8 +286,9 @@ class _ListDestinationSection extends StatelessWidget {
           ),
           ListView.builder(
             shrinkWrap: true,
-            itemCount: _controller.data.value.destinations!.length,
+            itemCount: _controller.data.value!.destinations!.length,
             itemBuilder: (ctx, idx) => ListTile(
+              onTap: () => _controller.onChangeDestinationFee(idx),
               contentPadding: EdgeInsets.zero,
               title: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -309,7 +316,7 @@ class _ListDestinationSection extends StatelessWidget {
                               children: [
                                 SizedBox(height: 5.h),
                                 Text(
-                                  _controller.data.value.destinations![idx].name!,
+                                  _controller.data.value!.destinations![idx].name!,
                                   style: TextStyle(
                                     fontSize: 14.sp,
                                     fontWeight: FontWeight.w700,
@@ -321,7 +328,7 @@ class _ListDestinationSection extends StatelessWidget {
                                     Icon(Icons.list_alt, size: 10.w),
                                     SizedBox(width: 5.w),
                                     Text(
-                                      _controller.data.value.destinations![idx].note!,
+                                      _controller.data.value!.destinations![idx].note!,
                                       style: TextStyle(
                                         fontSize: 12.sp,
                                         fontWeight: FontWeight.w400,
@@ -336,14 +343,16 @@ class _ListDestinationSection extends StatelessWidget {
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Text(
-                                TextUtil.toRupiah(_controller.data.value.destinations![idx].expenses!),
-                                style: TextStyle(
-                                  fontSize: 12.sp,
-                                  fontWeight: FontWeight.w400,
+                              Obx(
+                                () => Text(
+                                  TextUtil.toRupiah(_controller.data.value!.destinations![idx].expenses!),
+                                  style: TextStyle(
+                                    fontSize: 12.sp,
+                                    fontWeight: FontWeight.w400,
+                                  ),
                                 ),
                               ),
-                              _controller.data.value.status == 'on-going'
+                              _controller.data.value!.status == 'on-going'
                                   ? Icon(Icons.chevron_right)
                                   : Container(),
                             ],
@@ -386,7 +395,7 @@ class _CustomerInfoSection extends StatelessWidget {
           ),
           SizedBox(height: 6.h),
           Text(
-            _controller.data.value.customerName!,
+            _controller.data.value!.customerName!,
             style: TextStyle(
               fontSize: 14.sp,
               fontWeight: FontWeight.w700,
@@ -394,7 +403,7 @@ class _CustomerInfoSection extends StatelessWidget {
           ),
           SizedBox(height: 4.h),
           Text(
-            _controller.data.value.customerAddress!,
+            _controller.data.value!.customerAddress!,
             style: TextStyle(
               fontSize: 12.sp,
               fontWeight: FontWeight.w400,
@@ -432,7 +441,7 @@ class _TitleSection extends StatelessWidget {
                 ),
               ),
               Text(
-                "#${_controller.data.value.id}",
+                "#${_controller.data.value!.id}",
                 style: TextStyle(
                   fontSize: 12.sp,
                   fontWeight: FontWeight.w400,
@@ -447,9 +456,9 @@ class _TitleSection extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                _controller.data.value.status == "on-going"
+                _controller.data.value!.status == "on-going"
                     ? "Dalam Proses"
-                    : _controller.data.value.status == "cancel"
+                    : _controller.data.value!.status == "cancel"
                         ? "Dibatalkan"
                         : "Selesai",
                 style: TextStyle(
@@ -458,7 +467,7 @@ class _TitleSection extends StatelessWidget {
                 ),
               ),
               Text(
-                TextUtil.formatDate(DateTime.parse(_controller.data.value.createdAt!)) + " WIB",
+                TextUtil.formatDate(DateTime.parse(_controller.data.value!.createdAt!)) + " WIB",
                 style: TextStyle(
                   fontSize: 12.sp,
                   fontWeight: FontWeight.w400,
