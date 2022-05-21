@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:zendo_mobile/app/core/utils/text.dart';
+import 'package:zendo_mobile/app/routes/app_pages.dart';
 
 import '../../core/values/constants.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -25,7 +27,9 @@ class OrderCard extends StatelessWidget {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: kDefaultMargin * 3),
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          Get.toNamed(Routes.DETAIL_ORDER, arguments: data.id);
+        },
         child: Container(
           padding: EdgeInsets.symmetric(
             horizontal: kDefaultMargin * 2,
