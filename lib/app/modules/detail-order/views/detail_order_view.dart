@@ -80,9 +80,11 @@ class _CompleteOrderState extends StatelessWidget {
 }
 
 class _OngoingOrderState extends StatelessWidget {
-  const _OngoingOrderState({
+  _OngoingOrderState({
     Key? key,
   }) : super(key: key);
+
+  final DetailOrderController _controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -116,7 +118,7 @@ class _OngoingOrderState extends StatelessWidget {
                     primary: Colors.red.shade100,
                     minimumSize: const Size.fromHeight(45),
                   ),
-                  onPressed: () {},
+                  onPressed: () => _controller.onCancelPress(),
                   child: Text(
                     "Batal",
                     style: TextStyle(

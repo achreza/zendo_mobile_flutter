@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -8,9 +9,11 @@ import 'package:zendo_mobile/app/core/utils/snackbar.dart';
 import 'package:zendo_mobile/app/data/dto/request/update_order_request.dart';
 import 'package:zendo_mobile/app/data/models/order.dart';
 import 'package:zendo_mobile/app/data/services/order_service.dart';
+import 'package:zendo_mobile/app/modules/home/controllers/home_controller.dart';
 
 class DetailOrderController extends GetxController with StateMixin {
   final OrderService orderService = Get.find();
+  final HomeController homeController = Get.find();
   final Rx<Order?> data = Rx<Order?>(null);
 
   void fetchDetailOrder(int id) async {
@@ -107,6 +110,7 @@ class DetailOrderController extends GetxController with StateMixin {
                         await updateOrder();
                         Get.back();
                         fetchDetailOrder(data.value!.id!);
+                        homeController.fetchOngoingOrders();
                       }
                     },
                     child: Text(
@@ -131,6 +135,25 @@ class DetailOrderController extends GetxController with StateMixin {
         ),
       ),
       backgroundColor: Colors.white,
+    );
+  }
+
+  void onCancelPress() {
+    Get.defaultDialog(
+      title: "Batalkan Pesanan",
+      content: Text("Apakah anda yakin ingin membatalkan pesanan ini?"),
+      textConfirm: "Ya",
+      textCancel: "Tidak",
+      onConfirm: () async {
+        try {
+          await orderService.cancelOrder(data.value!.id!);
+          homeController.fetchOngoingOrders();
+          Get.back();
+          Timer(Duration(milliseconds: 400), () => Get.back());
+        } catch (e) {
+          SnackbarUtil.showError(e.toString().replaceAll('Exception: ', ''));
+        }
+      },
     );
   }
 

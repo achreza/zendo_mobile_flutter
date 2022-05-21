@@ -42,6 +42,20 @@ class OrderService extends GetxService {
     }
   }
 
+  Future<void> cancelOrder(int id) async {
+    final response = await orderProvider.cancel(id);
+
+    switch (response.statusCode) {
+      case HttpStatus.badRequest:
+        throw Exception('Gagal membatalkan order');
+      case HttpStatus.unprocessableEntity:
+        throw Exception('Gagal membatalkan order');
+      case null:
+        throw Exception('Gagal menghubungkan ke server');
+      default:
+    }
+  }
+
   Future<List<Order>> getOngoingOrders() async {
     final response = await orderProvider.getOngoingOrders();
     final ListOrderResponse orderResponse = ListOrderResponse.fromJson(response.body);

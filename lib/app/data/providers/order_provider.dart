@@ -29,6 +29,8 @@ class OrderProvider extends GetConnect {
 
   Future<Response> detail(int id) => get('/order/$id');
 
+  Future<Response> cancel(int id) => post('/order/$id/cancel', {});
+
   Future<Response> getOngoingOrders() => get('/profile/order/ongoing');
 
 }

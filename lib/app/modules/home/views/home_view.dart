@@ -42,24 +42,27 @@ class _NotEmptyState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _PageTitle(),
-          Container(
-            child: Text(
-              'Order Aktif',
-              style: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w700),
+    return RefreshIndicator(
+      onRefresh: () async => controller.fetchOngoingOrders(),
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _PageTitle(),
+            Container(
+              child: Text(
+                'Order Aktif',
+                style: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w700),
+              ),
+              margin: EdgeInsets.only(
+                left: kDefaultMargin * 3,
+                top: kDefaultMargin * 2,
+                bottom: kDefaultMargin,
+              ),
             ),
-            margin: EdgeInsets.only(
-              left: kDefaultMargin * 3,
-              top: kDefaultMargin * 2,
-              bottom: kDefaultMargin,
-            ),
-          ),
-          OrderList(data: controller.orders),
-        ],
+            OrderList(data: controller.orders),
+          ],
+        ),
       ),
     );
   }
