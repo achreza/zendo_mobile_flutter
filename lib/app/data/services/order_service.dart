@@ -1,14 +1,30 @@
 import 'dart:developer';
 
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/status/http_status.dart';
+import 'package:zendo_mobile/app/data/dto/request/create_order_request.dart';
 import 'package:zendo_mobile/app/data/dto/response/list_order_response.dart';
-import 'package:zendo_mobile/app/data/models/order_model.dart';
+import 'package:zendo_mobile/app/data/models/order.dart';
 import 'package:zendo_mobile/app/data/providers/order_provider.dart';
 
 class OrderService extends GetxService {
   final OrderProvider orderProvider = Get.find();
 
   Future<OrderService> init() async => this;
+
+  Future<void> createOrder(CreateOrderRequest requestData) async {
+    final response = await orderProvider.create(requestData);
+
+    switch (response.statusCode) {
+      case HttpStatus.badRequest:
+        throw Exception('Gagal membuat order');
+      case HttpStatus.unprocessableEntity:
+        throw Exception('Gagal membuat order');
+      case null:
+        throw Exception('Gagal menghubungkan ke server');
+      default:
+    }
+  }
 
   Future<List<Order>> getOngoingOrders() async {
     final response = await orderProvider.getOngoingOrders();

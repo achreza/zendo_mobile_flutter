@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:zendo_mobile/app/core/utils/text.dart';
+import 'package:zendo_mobile/app/data/models/order.dart';
 
 import '../../core/values/constants.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -7,7 +9,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class FeeCard extends StatelessWidget {
   const FeeCard({
     Key? key,
+    required this.data,
+    this.onDelete,
   }) : super(key: key);
+
+  final AdditionalFee data;
+  final Function? onDelete;
 
   @override
   Widget build(BuildContext context) {
@@ -25,14 +32,16 @@ class FeeCard extends StatelessWidget {
         ),
         trailing: IconButton(
           icon: Icon(Icons.close),
-          onPressed: () {},
+          onPressed: () {
+            onDelete?.call();
+          },
         ),
         title: Container(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Cancel Fee',
+                data.note!,
                 style: TextStyle(
                   fontSize: 14.sp,
                   fontWeight: FontWeight.w700,
@@ -48,7 +57,7 @@ class FeeCard extends StatelessWidget {
                   ),
                   SizedBox(width: 10.w),
                   Text(
-                    'Rp. 5.000',
+                    TextUtil.toRupiah(data.expenses!),
                     style: TextStyle(
                       fontSize: 12.sp,
                       fontWeight: FontWeight.w400,

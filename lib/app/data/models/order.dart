@@ -9,8 +9,8 @@ class Order {
   String? note;
   String? createdAt;
   String? updatedAt;
-  List<Destinations>? destinations;
-  List<AdditionalFees>? additionalFees;
+  List<Destination>? destinations;
+  List<AdditionalFee>? additionalFees;
 
   Order(
       {this.id,
@@ -38,15 +38,15 @@ class Order {
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     if (json['destinations'] != null) {
-      destinations = <Destinations>[];
+      destinations = <Destination>[];
       json['destinations'].forEach((v) {
-        destinations!.add(Destinations.fromJson(v));
+        destinations!.add(Destination.fromJson(v));
       });
     }
     if (json['additional_fees'] != null) {
-      additionalFees = <AdditionalFees>[];
+      additionalFees = <AdditionalFee>[];
       json['additional_fees'].forEach((v) {
-        additionalFees!.add(AdditionalFees.fromJson(v));
+        additionalFees!.add(AdditionalFee.fromJson(v));
       });
     }
   }
@@ -73,16 +73,16 @@ class Order {
   }
 }
 
-class Destinations {
+class Destination {
   int? id;
   String? name;
   int? expenses;
   String? note;
   int? orderId;
 
-  Destinations({this.id, this.name, this.expenses, this.note, this.orderId});
+  Destination({this.id, this.name, this.expenses, this.note, this.orderId});
 
-  Destinations.fromJson(Map<String, dynamic> json) {
+  Destination.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     expenses = json['expenses'];
@@ -92,24 +92,22 @@ class Destinations {
 
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
-    data['id'] = id;
     data['name'] = name;
     data['expenses'] = expenses;
     data['note'] = note;
-    data['order_id'] = orderId;
     return data;
   }
 }
 
-class AdditionalFees {
+class AdditionalFee {
   int? id;
   String? note;
   int? expenses;
   int? orderId;
 
-  AdditionalFees({this.id, this.note, this.expenses, this.orderId});
+  AdditionalFee({this.id, this.note, this.expenses, this.orderId});
 
-  AdditionalFees.fromJson(Map<String, dynamic> json) {
+  AdditionalFee.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     note = json['note'];
     expenses = json['expenses'];
@@ -118,10 +116,8 @@ class AdditionalFees {
 
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
-    data['id'] = id;
     data['note'] = note;
     data['expenses'] = expenses;
-    data['order_id'] = orderId;
     return data;
   }
 }

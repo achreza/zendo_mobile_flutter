@@ -9,6 +9,6 @@ class HomeBinding extends Bindings {
   void dependencies() {
     Get.lazyPut<OrderProvider>(() => OrderProvider());
     Get.lazyPut<OrderService>(() => OrderService());
-    Get.put<HomeController>(HomeController());
+    Get.put<HomeController>(HomeController(), permanent: true);
   }
 }
