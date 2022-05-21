@@ -1,20 +1,17 @@
 import 'package:get/get.dart';
+import 'package:zendo_mobile/app/data/models/order.dart';
 
 class DetailOrderController extends GetxController {
-  //TODO: Implement DetailOrderController
+  final Rx<Order> data = Rx<Order>(Get.arguments as Order);
 
-  final count = 0.obs;
   @override
   void onInit() {
     super.onInit();
-  }
 
-  @override
-  void onReady() {
-    super.onReady();
+    if (Get.arguments is Order) {
+      data.value = Get.arguments as Order;
+    } else {
+      Get.back();
+    }
   }
-
-  @override
-  void onClose() {}
-  void increment() => count.value++;
 }
