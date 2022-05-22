@@ -23,9 +23,11 @@ class OrderProvider extends GetConnect {
     });
   }
 
-  Future<Response> create(CreateOrderRequest data) => post('/order', data.toJson());
+  Future<Response> create(CreateOrderRequest data) =>
+      post('/order', data.toJson());
 
-  Future<Response> update(int id, UpdateOrderRequest data) => put('/order/$id', data.toJson());
+  Future<Response> update(int id, UpdateOrderRequest data) =>
+      put('/order/$id', data.toJson());
 
   Future<Response> detail(int id) => get('/order/$id');
 
@@ -35,4 +37,5 @@ class OrderProvider extends GetConnect {
 
   Future<Response> getOngoingOrders() => get('/profile/order/ongoing');
 
+  Future<Response> getHistoryOrders() => get('/profile/order/history');
 }

@@ -2,14 +2,18 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:zendo_mobile/app/data/dto/request/logout_request.dart';
 import 'package:zendo_mobile/app/data/models/order.dart';
 import 'package:zendo_mobile/app/data/models/profile.dart';
 import 'package:zendo_mobile/app/data/services/auth_service.dart';
+import 'package:zendo_mobile/app/data/services/db_service.dart';
 import 'package:zendo_mobile/app/data/services/order_service.dart';
 import 'package:zendo_mobile/app/modules/home/views/home_view.dart';
 import 'package:zendo_mobile/app/modules/home/views/profile_view.dart';
+import 'package:zendo_mobile/app/routes/app_pages.dart';
 
-class HomeController extends GetxController with GetSingleTickerProviderStateMixin {
+class HomeController extends GetxController
+    with GetSingleTickerProviderStateMixin {
   final List<Widget> pages = [HomeView(), ProfileView()];
   final RxInt tabIndex = 0.obs;
   final RxList<Order> orders = RxList();
@@ -21,6 +25,8 @@ class HomeController extends GetxController with GetSingleTickerProviderStateMix
 
   final RxBool isFetchingProfile = true.obs;
   final AuthService authService = Get.find();
+
+  final DbService dbService = Get.find();
 
   void fetchOngoingOrders() async {
     isFetchingOrder.value = true;
@@ -65,5 +71,18 @@ class HomeController extends GetxController with GetSingleTickerProviderStateMix
   void onClose() {
     tabController.dispose();
     super.onClose();
+  }
+
+  void logout() async {
+    try {
+      final token = dbService.getAuthToken();
+      final LogoutRequest logoutRequest = LogoutRequest(token: token!);
+      await authService.logout(logoutRequest);
+    } catch (e) {
+    } finally {
+      dbService.deleteAuthToken();
+      dbService.deleteUserCredential();
+      Get.offNamedUntil('/login', (route) => false);
+    }
   }
 }
