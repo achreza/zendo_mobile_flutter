@@ -3,8 +3,10 @@ import 'dart:developer';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/status/http_status.dart';
 import 'package:zendo_mobile/app/data/dto/response/login_response.dart';
+import 'package:zendo_mobile/app/data/models/profile.dart';
 import 'package:zendo_mobile/app/data/models/user_credential.dart';
 import 'package:zendo_mobile/app/data/providers/auth_provider.dart';
+import 'package:zendo_mobile/app/data/providers/profile_provider.dart';
 import 'package:zendo_mobile/app/data/services/db_service.dart';
 
 import '../dto/request/login_request.dart';
@@ -12,6 +14,7 @@ import '../dto/request/login_request.dart';
 class AuthService extends GetxService {
   final DbService dbService = Get.find();
   final AuthProvider authProvider = Get.find();
+  final ProfileProvider profileProvider = Get.find();
 
   Future<AuthService> init() async => this;
 
@@ -41,5 +44,23 @@ class AuthService extends GetxService {
       dbService.saveUserCredential(user),
       dbService.saveAuthToken(token),
     ]);
+  }
+
+  Future<Profile> getProfile() async {
+    final response = await profileProvider.profile();
+
+    switch (response.statusCode) {
+      case HttpStatus.unauthorized:
+        throw Exception('Kredensial tidak valid');
+      case HttpStatus.notFound:
+        throw Exception('Kredensial tidak valid');
+      case null:
+        throw Exception('Gagal menghubungkan ke server');
+      default:
+    }
+
+    final data = response.body['data'];
+
+    return Profile.fromJson(data);
   }
 }
