@@ -5,7 +5,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:zendo_mobile/app/data/models/user.dart';
+import 'package:intl/intl.dart';
+import 'package:zendo_mobile/app/core/theme/light_theme.dart';
+import 'package:zendo_mobile/app/data/models/user_credential.dart';
 import 'package:zendo_mobile/app/data/services/db_service.dart';
 
 import 'app/routes/app_pages.dart';
@@ -14,6 +16,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initHive();
   await initServices();
+  Intl.defaultLocale = 'id_ID';
 
   runApp(mainApp());
 }
@@ -22,7 +25,7 @@ DevicePreview mainApp() {
   return DevicePreview(
     enabled: true,
     builder: (_) => ScreenUtilInit(
-      designSize: Size(418, 823),
+      designSize: Size(394, 916),
       builder: (_) {
         // Set Orientation
         SystemChrome.setPreferredOrientations([
@@ -33,7 +36,9 @@ DevicePreview mainApp() {
         return GetMaterialApp(
           title: "Zendo",
           initialRoute: AppPages.INITIAL,
+          theme: lightTheme,
           getPages: AppPages.routes,
+          themeMode: ThemeMode.light,
         );
       },
     ),
@@ -42,7 +47,7 @@ DevicePreview mainApp() {
 
 Future<void> initHive() async {
   await Hive.initFlutter();
-  Hive.registerAdapter(UserAdapter());
+  Hive.registerAdapter(UserCredentialAdapter());
 }
 
 Future<void> initServices() async {

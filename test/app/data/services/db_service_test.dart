@@ -1,7 +1,7 @@
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
-import 'package:zendo_mobile/app/data/models/user.dart';
+import 'package:zendo_mobile/app/data/models/user_credential.dart';
 import 'package:zendo_mobile/app/data/services/db_service.dart';
 import 'db_service_test.mocks.dart';
 
@@ -16,8 +16,8 @@ void main() {
 
     test('should have methods', () {
       expect(dbService.init, isNotNull);
-      expect(dbService.saveUser, isNotNull);
-      expect(dbService.getUser, isNotNull);
+      expect(dbService.saveUserCredential, isNotNull);
+      expect(dbService.getUserCredential, isNotNull);
       expect(dbService.saveAuthToken, isNotNull);
       expect(dbService.getAuthToken, isNotNull);
       expect(dbService.saveRefreshToken, isNotNull);
@@ -34,30 +34,30 @@ void main() {
       expect(actualValue, expectedValue);
     });
 
-    test('method saveUser should not throw exception', () async {
-      final user = User(phoneNumber: '+123456789', name: 'test');
-      await dbService.saveUser(user);
+    test('method saveUserCredential should not throw exception', () async {
+      final user = UserCredential(phoneNumber: '+123456789', token: 'token');
+      await dbService.saveUserCredential(user);
     });
 
-    test('method saveUser should throw exception', () async {
-      final user = User(phoneNumber: '+123456789', name: 'test');
-      when(dbService.saveUser(user)).thenThrow(Exception());
+    test('method saveUserCredential should throw exception', () async {
+      final user = UserCredential(phoneNumber: '+123456789', token: 'token');
+      when(dbService.saveUserCredential(user)).thenThrow(Exception());
 
       expect(() => dbService.saveUser(user), throwsException);
     });
 
-    test('method getUser should return User', () {
-      const expectedValue = User(name: "test", phoneNumber: "00");
-      when(dbService.getUser()).thenAnswer((_) => expectedValue);
+    test('method getUser should return UserCredential', () {
+      const expectedValue = UserCredential(phoneNumber: '+123456789', token: 'token');
+      when(dbService.getUserCredential()).thenAnswer((_) => expectedValue);
 
-      final user = dbService.getUser();
+      final user = dbService.getUserCredential();
       expect(user, expectedValue);
     });
 
-    test('method getUser should return null', () {
-      when(dbService.getUser()).thenAnswer((_) => null);
+    test('method getUserCredential should return null', () {
+      when(dbService.getUserCredential()).thenAnswer((_) => null);
 
-      final user = dbService.getUser();
+      final user = dbService.getUserCredential();
       expect(user, null);
     });
 
