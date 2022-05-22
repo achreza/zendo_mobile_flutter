@@ -102,7 +102,7 @@ class _OngoingOrderState extends StatelessWidget {
               primary: Colors.white,
               minimumSize: const Size.fromHeight(45),
             ),
-            onPressed: () {},
+            onPressed: () => Get.toNamed("/change-order", arguments: _controller.data.value!.id),
             child: Text(
               "Ubah Order",
               style: TextStyle(color: Colors.red, fontSize: 15.sp, fontWeight: FontWeight.bold),
