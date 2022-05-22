@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:wc_form_validators/wc_form_validators.dart';
 import 'package:zendo_mobile/app/components/cards/destination_card.dart';
 import 'package:zendo_mobile/app/components/cards/fee_card.dart';
 import 'package:zendo_mobile/app/core/values/constants.dart';
@@ -57,6 +58,11 @@ class CreateOrderView extends GetView<CreateOrderController> {
                           border: OutlineInputBorder(),
                           hintText: 'Masukkan Nama Pelanggan',
                         ),
+                        onChanged: (value) => controller.customerName.value = value,
+                        validator: Validators.compose([
+                          Validators.required("Nama Pelanggan tidak boleh kosong"),
+                          Validators.maxLength(30, "Nama Pelanggan maksimal 30 karakter"),
+                        ]),
                       ),
                     ],
                   ),
@@ -80,6 +86,11 @@ class CreateOrderView extends GetView<CreateOrderController> {
                           border: OutlineInputBorder(),
                           hintText: 'Masukkan Alamat Pelanggan',
                         ),
+                        onChanged: (value) => controller.customerAddress.value = value,
+                        validator: Validators.compose([
+                          Validators.required("Alamat Pelanggan tidak boleh kosong"),
+                          Validators.maxLength(60, "Alamat Pelanggan maksimal 60 karakter"),
+                        ]),
                       ),
                     ],
                   ),
@@ -104,6 +115,12 @@ class CreateOrderView extends GetView<CreateOrderController> {
                           border: OutlineInputBorder(),
                           hintText: 'Masukkan Ongkos Kirim',
                         ),
+                        onChanged: (value) => controller.deliveryFee.value = value,
+                        validator: Validators.compose([
+                          Validators.required("Ongkos Kirim tidak boleh kosong"),
+                          Validators.min(2000, "Ongkos Kirim minimal Rp. 2.000"),
+                          Validators.max(1000000, "Ongkos Kirim maksimal Rp. 1.000.000"),
+                        ]),
                       ),
                     ],
                   ),
@@ -140,11 +157,16 @@ class CreateOrderView extends GetView<CreateOrderController> {
                         ),
                       ),
                       SizedBox(height: inputSpace),
-                      ListView.builder(
-                        shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        itemCount: 2,
-                        itemBuilder: (context, index) => FeeCard(),
+                      Obx(
+                        () => ListView.builder(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: controller.additionalFees.length,
+                          itemBuilder: (context, index) => FeeCard(
+                            data: controller.additionalFees[index],
+                            onDelete: () => controller.onDeleteFeeIndex(index),
+                          ),
+                        ),
                       ),
                     ],
                   ),
@@ -182,12 +204,17 @@ class CreateOrderView extends GetView<CreateOrderController> {
                         ),
                       ),
                       SizedBox(height: inputSpace),
-                      ListView.builder(
-                        shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        itemCount: 2,
-                        itemBuilder: (context, index) => DestinationCard(),
-                      ),
+                      Obx(
+                        () => ListView.builder(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: controller.destinations.length,
+                          itemBuilder: (context, index) => DestinationCard(
+                            data: controller.destinations[index],
+                            onDelete: () => controller.onDeleteDestinationIndex(index),
+                          ),
+                        ),
+                      )
                     ],
                   ),
                 ),
@@ -195,9 +222,11 @@ class CreateOrderView extends GetView<CreateOrderController> {
                 Container(
                   height: 50.h,
                   width: double.infinity,
-                  child: ElevatedButton(
-                    child: Text('Simpan Order'),
-                    onPressed: () {},
+                  child: Obx(
+                    () => ElevatedButton(
+                      child: Text('Simpan Order'),
+                      onPressed: controller.isSubmit.isFalse ? controller.onSubmit : null,
+                    ),
                   ),
                 ),
               ],

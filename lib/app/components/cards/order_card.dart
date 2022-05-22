@@ -1,19 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:zendo_mobile/app/core/utils/text.dart';
+import 'package:zendo_mobile/app/routes/app_pages.dart';
 
 import '../../core/values/constants.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../data/models/order.dart';
+
 class OrderCard extends StatelessWidget {
   const OrderCard({
     Key? key,
+    required this.data,
   }) : super(key: key);
+
+  final Order data;
 
   @override
   Widget build(BuildContext context) {
+    final statusText = data.status! == "on-going"
+        ? "Dalam Proses"
+        : data.status! == "cancel"
+            ? "Dibatalkan"
+            : "Selesai";
+
     return Container(
       margin: EdgeInsets.symmetric(horizontal: kDefaultMargin * 3),
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          Get.toNamed(Routes.DETAIL_ORDER, arguments: data.id);
+        },
         child: Container(
           padding: EdgeInsets.symmetric(
             horizontal: kDefaultMargin * 2,
@@ -32,7 +48,7 @@ class OrderCard extends StatelessWidget {
                 children: [
                   Flexible(
                     child: Text(
-                      "INV-217841931933",
+                      "#${data.id}",
                       style: TextStyle(
                         fontSize: 12.sp,
                         fontWeight: FontWeight.w500,
@@ -41,7 +57,7 @@ class OrderCard extends StatelessWidget {
                   ),
                   Flexible(
                     child: Text(
-                      "Senin, 20 Maret 2040 - 09.00 WIB",
+                      TextUtil.formatDate(DateTime.parse(data.createdAt!)) + " WIB",
                       style: TextStyle(
                         fontSize: 12.sp,
                         fontWeight: FontWeight.w500,
@@ -53,7 +69,7 @@ class OrderCard extends StatelessWidget {
               SizedBox(height: 7.h),
               RichText(
                 text: TextSpan(
-                  text: 'Bu Subagio',
+                  text: data.customerName,
                   style: TextStyle(
                     fontSize: 14.sp,
                     fontWeight: FontWeight.w500,
@@ -66,13 +82,13 @@ class OrderCard extends StatelessWidget {
                         color: Colors.grey.shade500,
                       ),
                     ),
-                    TextSpan(text: '+62897473824242'),
+                    TextSpan(text: data.customerAddress),
                   ],
                 ),
               ),
               SizedBox(height: 5.h),
               Text(
-                "Rp 15.000",
+                TextUtil.toRupiah(data.totalFee!),
                 style: TextStyle(
                   fontSize: 14.sp,
                   fontWeight: FontWeight.w500,
@@ -92,7 +108,7 @@ class OrderCard extends StatelessWidget {
                   ),
                 ),
                 child: Text(
-                  "Dalam Proses",
+                  statusText,
                   style: TextStyle(
                     fontSize: 12.sp,
                     fontWeight: FontWeight.w500,

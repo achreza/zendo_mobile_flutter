@@ -5,7 +5,7 @@ import 'package:zendo_mobile/app/data/services/auth_service.dart';
 class LoginController extends GetxController {
   final RxBool isSubmit = false.obs;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  final RxBool passwordVisible = true.obs;
+  final RxBool passwordVisible = false.obs;
 
   final RxString phoneNumber = ''.obs;
   final RxString password = ''.obs;

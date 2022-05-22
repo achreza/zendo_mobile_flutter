@@ -14,6 +14,9 @@ dependencies:
   hive: ^2.1.0
   hive_flutter: ^1.1.0
   font_awesome_flutter: 10.1.0
+  intl: ^0.17.0
+  fluttertoast: ^8.0.9
+  shimmer_animation: 2.1.0+1
   flutter: 
     sdk: flutter
 
