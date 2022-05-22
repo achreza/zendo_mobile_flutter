@@ -72,7 +72,8 @@ class OrderService extends GetxService {
 
   Future<List<Order>> getOngoingOrders() async {
     final response = await orderProvider.getOngoingOrders();
-    final ListOrderResponse orderResponse = ListOrderResponse.fromJson(response.body);
+    final ListOrderResponse orderResponse =
+        ListOrderResponse.fromJson(response.body);
     return orderResponse.data;
   }
 
@@ -82,5 +83,10 @@ class OrderService extends GetxService {
     return orderResponse.data;
   }
 
-
+  Future<List<Order>> getHistoryOrders() async {
+    final response = await orderProvider.getHistoryOrders();
+    final ListOrderResponse orderResponse =
+        ListOrderResponse.fromJson(response.body);
+    return orderResponse.data;
+  }
 }
