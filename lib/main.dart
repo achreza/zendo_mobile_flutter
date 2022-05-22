@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:zendo_mobile/app/core/theme/light_theme.dart';
 import 'package:zendo_mobile/app/data/models/user.dart';
 import 'package:zendo_mobile/app/data/services/db_service.dart';
 
@@ -22,7 +23,7 @@ DevicePreview mainApp() {
   return DevicePreview(
     enabled: true,
     builder: (_) => ScreenUtilInit(
-      designSize: Size(418, 823),
+      designSize: Size(394, 916),
       builder: (_) {
         // Set Orientation
         SystemChrome.setPreferredOrientations([
@@ -33,7 +34,9 @@ DevicePreview mainApp() {
         return GetMaterialApp(
           title: "Zendo",
           initialRoute: AppPages.INITIAL,
+          theme: lightTheme,
           getPages: AppPages.routes,
+          themeMode: ThemeMode.light,
         );
       },
     ),
