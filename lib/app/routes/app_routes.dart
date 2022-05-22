@@ -9,18 +9,10 @@ abstract class Routes {
   static const SPLASH = _Paths.SPLASH;
   static const LOGIN = _Paths.LOGIN;
   static const HOME = _Paths.HOME;
-  static const CREATE_ORDER = _Paths.CREATE_ORDER;
-  static const DETAIL_ORDER = _Paths.DETAIL_ORDER;
-  static const DETAIL_ORDER_COMPLETE = _Paths.DETAIL_ORDER_COMPLETE;
-  static const CHANGE_ORDER = _Paths.CHANGE_ORDER;
 }
 
 abstract class _Paths {
   static const SPLASH = '/splash';
   static const LOGIN = '/login';
   static const HOME = '/home';
-  static const CREATE_ORDER = '/create-order';
-  static const DETAIL_ORDER = '/detail-order';
-  static const DETAIL_ORDER_COMPLETE = '/detail-order/complete';
-  static const CHANGE_ORDER = '/change-order';
 }
