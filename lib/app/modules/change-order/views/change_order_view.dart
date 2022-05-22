@@ -119,7 +119,7 @@ class ChangeOrderView extends GetView<ChangeOrderController> {
                             hintText: 'Masukkan Ongkos Kirim',
                           ),
                           initialValue: controller.data.value!.deliveryFee.toString(),
-                          onChanged: (value) => controller.data.value!.deliveryFee = int.parse(value),
+                          onChanged: (value) => controller.data.value!.deliveryFee = int.tryParse(value),
                           validator: Validators.compose([
                             Validators.required("Ongkos Kirim tidak boleh kosong"),
                             Validators.min(2000, "Ongkos Kirim minimal Rp. 2.000"),
