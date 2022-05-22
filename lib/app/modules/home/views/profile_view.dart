@@ -1,25 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:shimmer_animation/shimmer_animation.dart';
 import 'package:zendo_mobile/app/core/values/constants.dart';
 import 'package:zendo_mobile/app/modules/home/controllers/home_controller.dart';
 
 class ProfileView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
-    print("build profile view");
+    controller.fetchProfile();
     return Scaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _ProfileCard(),
-          Container(
-            margin: EdgeInsets.only(left: 32, bottom: 6).r,
-            child: Text(
-              "Hasil anda hari ini :",
-              style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w500),
-            ),
-          ),
           _RevenueSegment(),
           ListView(
             shrinkWrap: true,
@@ -65,80 +59,104 @@ class ProfileView extends GetView<HomeController> {
 }
 
 class _RevenueSegment extends StatelessWidget {
-  const _RevenueSegment({
+  _RevenueSegment({
     Key? key,
   }) : super(key: key);
 
+  final HomeController _homeController = Get.find();
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 72.h,
-      decoration: BoxDecoration(color: Colors.black),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          margin: EdgeInsets.only(left: 32, bottom: 6).r,
+          child: Text(
+            "Hasil anda hari ini :",
+            style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w500),
+          ),
+        ),
+        Container(
+          height: 72.h,
+          decoration: BoxDecoration(color: Colors.black),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Text(
-                "5",
-                style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w400, color: Colors.white),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Obx(
+                    () => Text(
+                      _homeController.profile.value?.orderCount.toString() ?? '0',
+                      style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w400, color: Colors.white),
+                    ),
+                  ),
+                  Text(
+                    "Order",
+                    style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w300, color: Colors.white),
+                  ),
+                ],
               ),
-              Text(
-                "Order",
-                style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w300, color: Colors.white),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Obx(
+                    () => Text(
+                      _homeController.profile.value?.todayOmzet.toString() ?? '0',
+                      style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w400, color: Colors.white),
+                    ),
+                  ),
+                  Text(
+                    "Omzet",
+                    style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w300, color: Colors.white),
+                  ),
+                ],
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Obx(
+                    () => Text(
+                      _homeController.profile.value?.todayIncome.toString() ?? '0',
+                      style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w400, color: Colors.green),
+                    ),
+                  ),
+                  Text(
+                    "Untuk Driver",
+                    style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w300, color: Colors.white),
+                  ),
+                ],
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Obx(
+                    () => Text(
+                      _homeController.profile.value?.todayDeposit.toString() ?? '0',
+                      style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w400, color: Colors.yellow),
+                    ),
+                  ),
+                  Text(
+                    "Setoran",
+                    style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w300, color: Colors.white),
+                  ),
+                ],
               ),
             ],
           ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                "15.000",
-                style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w400, color: Colors.white),
-              ),
-              Text(
-                "Omzet",
-                style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w300, color: Colors.white),
-              ),
-            ],
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                "12.000",
-                style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w400, color: Colors.green),
-              ),
-              Text(
-                "Untuk Driver",
-                style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w300, color: Colors.white),
-              ),
-            ],
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                "3.000",
-                style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w400, color: Colors.yellow),
-              ),
-              Text(
-                "Setoran",
-                style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w300, color: Colors.white),
-              ),
-            ],
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
 
 class _ProfileCard extends StatelessWidget {
-  const _ProfileCard({
+  _ProfileCard({
     Key? key,
   }) : super(key: key);
+
+  final HomeController _controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -157,6 +175,11 @@ class _ProfileCard extends StatelessWidget {
             width: 56.w,
             child: CircleAvatar(
               backgroundColor: Colors.grey,
+              child: Icon(
+                Icons.person,
+                color: Colors.white,
+                size: 28.w,
+              ),
             ),
           ),
           Container(
@@ -165,16 +188,37 @@ class _ProfileCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  "Achmad Fahreza",
-                  style: TextStyle(
-                    fontSize: 24.sp,
-                    fontWeight: FontWeight.w500,
-                  ),
+                Obx(
+                  () => _controller.profile.value == null
+                      ? Shimmer(
+                          child: Container(
+                            width: Get.width * 0.4,
+                            height: 24.h,
+                            color: Colors.grey.shade100,
+                          ),
+                        )
+                      : Text(
+                          _controller.profile.value?.driver?.name ?? "",
+                          style: TextStyle(
+                            fontSize: 24.sp,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
                 ),
-                Text(
-                  "+62983232322",
-                  style: TextStyle(fontSize: 14.sp),
+                SizedBox(height: 4.h),
+                Obx(
+                  () => _controller.profile.value == null
+                      ? Shimmer(
+                          child: Container(
+                            width: Get.width * 0.25,
+                            height: 14.h,
+                            color: Colors.grey.shade100,
+                          ),
+                        )
+                      : Text(
+                          _controller.profile.value?.driver?.phoneNumber ?? "",
+                          style: TextStyle(fontSize: 14.sp),
+                        ),
                 ),
               ],
             ),
