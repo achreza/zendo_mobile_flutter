@@ -17,6 +17,9 @@ dependencies:
   intl: ^0.17.0
   fluttertoast: ^8.0.9
   shimmer_animation: 2.1.0+1
+  path_provider: 2.0.10
+  dio: 4.0.6
+  permission_handler: 9.2.0
   flutter: 
     sdk: flutter
 

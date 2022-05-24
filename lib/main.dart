@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:zendo_mobile/app/core/theme/light_theme.dart';
 import 'package:zendo_mobile/app/data/models/user_credential.dart';
 import 'package:zendo_mobile/app/data/services/db_service.dart';
@@ -17,13 +18,14 @@ Future<void> main() async {
   await initHive();
   await initServices();
   Intl.defaultLocale = 'id_ID';
+  initializeDateFormatting();
 
   runApp(mainApp());
 }
 
 DevicePreview mainApp() {
   return DevicePreview(
-    enabled: true,
+    enabled: false,
     builder: (_) => ScreenUtilInit(
       designSize: Size(394, 916),
       builder: (_) {
