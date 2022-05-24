@@ -1,18 +1,25 @@
 import 'dart:async';
 import 'dart:developer';
+import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:wc_form_validators/wc_form_validators.dart';
 import 'package:zendo_mobile/app/core/utils/snackbar.dart';
 import 'package:zendo_mobile/app/core/utils/toast.dart';
+import 'package:zendo_mobile/app/core/values/constants.dart';
 import 'package:zendo_mobile/app/data/dto/request/update_order_request.dart';
 import 'package:zendo_mobile/app/data/models/order.dart';
+import 'package:zendo_mobile/app/data/services/db_service.dart';
 import 'package:zendo_mobile/app/data/services/order_service.dart';
 import 'package:zendo_mobile/app/modules/home/controllers/home_controller.dart';
 
 class DetailOrderController extends GetxController with StateMixin {
+  final DbService dbService = Get.find();
   final OrderService orderService = Get.find();
   final HomeController homeController = Get.find();
   final Rx<Order?> data = Rx<Order?>(null);
@@ -178,6 +185,57 @@ class DetailOrderController extends GetxController with StateMixin {
         }
       },
     );
+  }
+
+  void downloadInvoice() async {
+    // validate if order is exist
+    if (data.value == null) {
+      SnackbarUtil.showError("Pesanan tidak ditemukan");
+      return;
+    }
+
+    // validate if application has permission to write to external storage
+    if (!(await Permission.manageExternalStorage.isGranted)) {
+      if (await Permission.manageExternalStorage.request().isGranted) {
+        downloadInvoice();
+      } else {
+        SnackbarUtil.showError("Anda tidak memiliki izin untuk mengakses penyimpanan");
+      }
+      return;
+    }
+
+    // get the invoice
+    final token = dbService.getAuthToken()!;
+    final dio = Dio();
+
+    final appStorage = (await getExternalStorageDirectories(type: StorageDirectory.downloads))!.first;
+    final file = File('${appStorage.path}/zendo-invoice-${data.value!.id}.pdf');
+
+    final response = await dio.post(
+      '$apiBaseUrl/order/${data.value!.id}/invoice-download',
+      options: Options(
+        headers: {'Authorization': 'Bearer $token'},
+        responseType: ResponseType.bytes,
+        followRedirects: false,
+      ),
+    );
+
+    if (response.statusCode != HttpStatus.ok) {
+      SnackbarUtil.showError("Gagal mengambil invoice");
+      return;
+    }
+
+    // save invoice to external storage
+    try {
+      final raf = file.openSync(mode: FileMode.write);
+      raf.writeFromSync(response.data);
+      await raf.close();
+
+      SnackbarUtil.showDownload(file);
+    } catch (e) {
+      SnackbarUtil.showError("Gagal meyimpan invoice");
+      return;
+    }
   }
 
   @override
