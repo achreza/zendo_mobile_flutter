@@ -14,7 +14,7 @@ class AddOrderButton extends StatelessWidget {
       margin: EdgeInsets.symmetric(horizontal: kDefaultMargin * 6),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12.r),
-        color: Colors.grey.shade200,
+        color: Colors.grey.shade300,
       ),
       child: Material(
         color: Colors.transparent,
