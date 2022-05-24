@@ -10,7 +10,6 @@ import 'package:zendo_mobile/app/data/services/db_service.dart';
 import 'package:zendo_mobile/app/data/services/order_service.dart';
 import 'package:zendo_mobile/app/modules/home/views/home_view.dart';
 import 'package:zendo_mobile/app/modules/home/views/profile_view.dart';
-import 'package:zendo_mobile/app/routes/app_pages.dart';
 
 class HomeController extends GetxController
     with GetSingleTickerProviderStateMixin {
