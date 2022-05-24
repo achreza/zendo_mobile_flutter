@@ -6,6 +6,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:wc_form_validators/wc_form_validators.dart';
@@ -231,7 +232,7 @@ class DetailOrderController extends GetxController with StateMixin {
       raf.writeFromSync(response.data);
       await raf.close();
 
-      SnackbarUtil.showDownload(file);
+      OpenFile.open(file.path, type: "application/pdf");
     } catch (e) {
       SnackbarUtil.showError("Gagal meyimpan invoice");
       return;
