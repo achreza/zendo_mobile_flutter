@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:zendo_mobile/app/core/values/constants.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:open_file/open_file.dart';
 
 class SnackbarUtil {
   static void showError(String message) {
@@ -31,22 +32,18 @@ class SnackbarUtil {
   }
 
   static void showDownload(File file) {
-    Get.snackbar(
-      "Berhasil diunduh",
-      "Invoice telah tersimpan di ${file.path}",
+    Get.showSnackbar(GetSnackBar(
+      title: "Berhasil diunduh",
+      message: "File ${file.path.split("/").last} berhasil diunduh. Tekan untuk membuka file",
       snackPosition: SnackPosition.BOTTOM,
-      backgroundColor: Colors.white,
-      boxShadows: [
-        BoxShadow(
-          color: Colors.black.withOpacity(0.1),
-          offset: Offset(0, 3),
-          blurRadius: 6,
-        ),
-      ],
+      duration: Duration(seconds: 3),
       margin: EdgeInsets.symmetric(
-        horizontal: 20.w,
-        vertical: 10.h,
+        horizontal: kDefaultMargin * 3,
+        vertical: kDefaultMargin * 2,
       ),
-    );
+      onTap: (_) {
+        OpenFile.open(file.path, type: "application/pdf");
+      },
+    ));
   }
 }
