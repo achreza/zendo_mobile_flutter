@@ -1,7 +1,9 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/status/http_status.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:zendo_mobile/app/data/dto/request/create_order_request.dart';
 import 'package:zendo_mobile/app/data/dto/request/update_order_request.dart';
 import 'package:zendo_mobile/app/data/dto/response/list_order_response.dart';
@@ -72,8 +74,7 @@ class OrderService extends GetxService {
 
   Future<List<Order>> getOngoingOrders() async {
     final response = await orderProvider.getOngoingOrders();
-    final ListOrderResponse orderResponse =
-        ListOrderResponse.fromJson(response.body);
+    final ListOrderResponse orderResponse = ListOrderResponse.fromJson(response.body);
     return orderResponse.data;
   }
 
@@ -85,8 +86,9 @@ class OrderService extends GetxService {
 
   Future<List<Order>> getHistoryOrders() async {
     final response = await orderProvider.getHistoryOrders();
-    final ListOrderResponse orderResponse =
-        ListOrderResponse.fromJson(response.body);
+    final ListOrderResponse orderResponse = ListOrderResponse.fromJson(response.body);
     return orderResponse.data;
   }
+
+  
 }

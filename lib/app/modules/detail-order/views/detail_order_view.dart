@@ -15,6 +15,12 @@ class DetailOrderView extends GetView<DetailOrderController> {
       appBar: AppBar(
         title: Text("Detail Order"),
         centerTitle: true,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.download),
+            onPressed: () => controller.downloadInvoice(),
+          ),
+        ],
       ),
       body: controller.obx(
         (_) => Container(
