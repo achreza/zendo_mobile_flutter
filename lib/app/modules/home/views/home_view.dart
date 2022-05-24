@@ -90,7 +90,7 @@ class _EmptyState extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 24.sp,
                     fontWeight: FontWeight.w600,
-                    color: Colors.grey.shade200,
+                    color: Colors.grey.shade300,
                   ),
                 ),
                 SizedBox(height: kDefaultMargin * 2),
