@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/status/http_status.dart';
 import 'package:zendo_mobile/app/core/values/constants.dart';
 import 'package:zendo_mobile/app/data/dto/request/create_order_request.dart';
 import 'package:zendo_mobile/app/data/dto/request/update_order_request.dart';
@@ -18,16 +21,28 @@ class OrderProvider extends GetConnect {
     });
 
     httpClient.addAuthenticator<dynamic>((request) async {
-      Get.offAllNamed('/login');
+      if (request.url.toString().contains('/refresh')) {
+        dbService.deleteAuthToken();
+        dbService.deleteUserCredential();
+        Get.offAllNamed('/login');
+        return request;
+      }
+
+      final response = await httpClient.post('/refresh');
+
+      final String newToken = response.body['data']['token'];
+      await dbService.saveAuthToken(newToken);
+
+      request.headers['Authorization'] = 'Bearer $newToken';
+      request.headers['Accept'] = 'application/json';
+
       return request;
     });
   }
 
-  Future<Response> create(CreateOrderRequest data) =>
-      post('/order', data.toJson());
+  Future<Response> create(CreateOrderRequest data) => post('/order', data.toJson());
 
-  Future<Response> update(int id, UpdateOrderRequest data) =>
-      put('/order/$id', data.toJson());
+  Future<Response> update(int id, UpdateOrderRequest data) => put('/order/$id', data.toJson());
 
   Future<Response> detail(int id) => get('/order/$id');
 
