@@ -46,20 +46,18 @@ class OrderCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Flexible(
-                    child: Text(
-                      "#${data.id}",
-                      style: TextStyle(
-                        fontSize: 12.sp,
-                        fontWeight: FontWeight.w500,
-                      ),
+                  Text(
+                    "#${data.id}",
+                    style: TextStyle(
+                      fontSize: 12.sp,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
+                  SizedBox(width: 10.w),
                   Flexible(
                     child: Container(
                       child: Text(
-                        TextUtil.formatDate(DateTime.parse(data.createdAt!)) +
-                            " WIB",
+                        TextUtil.formatDate(DateTime.parse(data.createdAt!)) + " WIB",
                         style: TextStyle(
                           fontSize: 12.sp,
                           fontWeight: FontWeight.w500,
