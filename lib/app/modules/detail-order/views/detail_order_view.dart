@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:zendo_mobile/app/core/utils/share.dart';
 import 'package:zendo_mobile/app/core/utils/text.dart';
 import 'package:zendo_mobile/app/core/values/constants.dart';
 
@@ -77,7 +78,7 @@ class _CompleteOrderState extends StatelessWidget {
             primary: Colors.red,
             minimumSize: const Size.fromHeight(45),
           ),
-          onPressed: () {},
+          onPressed: () => ShareUtil.contactAdmin(),
           child: Text("Hubungi Admin"),
         ),
       ],
