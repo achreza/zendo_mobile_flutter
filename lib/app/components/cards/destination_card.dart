@@ -26,7 +26,7 @@ class DestinationCard extends StatelessWidget {
       title: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          FaIcon(FontAwesomeIcons.mapLocation, size: 17.w),
+          Image.asset('assets/icons/map-marker.png', width: 18.w),
           SizedBox(width: 10.w),
           Expanded(
             child: Container(
@@ -48,7 +48,7 @@ class DestinationCard extends StatelessWidget {
                       fontWeight: FontWeight.w700,
                     ),
                   ),
-                  SizedBox(height: 5.h),
+                  SizedBox(height: 3.h),
                   Row(
                     children: [
                       Icon(Icons.list_alt, size: 10.w),

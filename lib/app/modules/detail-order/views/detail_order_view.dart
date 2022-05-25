@@ -296,7 +296,9 @@ class _ListDestinationSection extends StatelessWidget {
             shrinkWrap: true,
             itemCount: _controller.data.value!.destinations!.length,
             itemBuilder: (ctx, idx) => ListTile(
-              onTap: () => _controller.onChangeDestinationFee(idx),
+              onTap: _controller.data.value!.status == 'on-going'
+                  ? () => _controller.onChangeDestinationFee(idx)
+                  : null,
               contentPadding: EdgeInsets.zero,
               title: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
