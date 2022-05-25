@@ -7,7 +7,7 @@ import 'package:zendo_mobile/app/core/values/constants.dart';
 class ShareUtil {
   static void contactAdmin() async {
     final whatsappUrlAndroid = Uri.parse("whatsapp://send?phone=$adminPhone");
-    final whatsappUrlIOS = Uri.parse("https://api.whatsapp.com/send/?phone=$adminPhone&app_absent=0");
+    final whatsappUrlIOS = Uri.parse("https://api.whatsapp.com/send/?phone=$adminPhone");
 
     if (Platform.isIOS) {
       if (await canLaunchUrl(whatsappUrlIOS)) {

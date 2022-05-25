@@ -26,7 +26,7 @@ class DestinationCard extends StatelessWidget {
       title: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Image.asset('assets/icons/map-marker.png', width: 18.w),
+          Image.asset('assets/icons/map_marker.png', width: 18.w),
           SizedBox(width: 10.w),
           Expanded(
             child: Container(

@@ -307,7 +307,7 @@ class _ListDestinationSection extends StatelessWidget {
                   Container(
                     margin: EdgeInsets.only(top: 5.h),
                     child: Image.asset(
-                      'assets/icons/map-marker.png',
+                      'assets/icons/map_marker.png',
                       width: 22.w,
                     ),
                   ),

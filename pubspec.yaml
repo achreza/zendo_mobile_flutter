@@ -25,8 +25,10 @@ dependencies:
     sdk: flutter
   line_icons: ^2.0.1
   url_launcher: ^6.1.2
+  
 
 dev_dependencies: 
+  icons_launcher: ^1.1.8
   flutter_lints: ^1.0.0
   lints: 1.0.1
   hive_generator: ^1.1.2
@@ -35,6 +37,11 @@ dev_dependencies:
   mockito: ^5.1.0
   flutter_test: 
     sdk: flutter
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/icons/app_icon.png"
 
 flutter: 
   assets: 

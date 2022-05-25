@@ -8,7 +8,7 @@ class SplashController extends GetxController {
   void onReady() {
     super.onReady();
 
-    Future.delayed(Duration(seconds: 2), () async {
+    Future.delayed(Duration(seconds: 1), () async {
       if (authService.isLoggedIn) {
         Get.offAllNamed('/home');
       } else {
