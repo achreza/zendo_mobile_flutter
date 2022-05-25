@@ -22,19 +22,22 @@ class RiwayatOrderView extends GetView<RiwayatOrderController> {
                   context: context,
                   builder: (BuildContext context) {
                     return Container(
-                        height: 250.h,
+                        height: 300.h,
                         padding: EdgeInsets.all(14).r,
                         decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(25).r, topRight: Radius.circular(25).r)),
+                                topLeft: Radius.circular(25).r,
+                                topRight: Radius.circular(25).r)),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Center(
                               child: Text(
                                 "Informasi",
-                                style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold),
+                                style: TextStyle(
+                                    fontSize: 20.sp,
+                                    fontWeight: FontWeight.bold),
                               ),
                             ),
                             Divider(
@@ -48,7 +51,13 @@ class RiwayatOrderView extends GetView<RiwayatOrderController> {
                             SizedBox(
                               height: 20.h,
                             ),
-                            Text("Pendapatan adalah jumlah ongkos kirim dari order yang telah selesai"),
+                            Text(
+                                "Omzet adalah jumlah ongkos kirim dari order yang telah selesai"),
+                            SizedBox(
+                              height: 20.h,
+                            ),
+                            Text(
+                                "Untuk Driver adalah jumlah bersih yang didapatkan driver setelah dipotong setoran"),
                             SizedBox(
                               height: 20.h,
                             ),
@@ -59,7 +68,16 @@ class RiwayatOrderView extends GetView<RiwayatOrderController> {
                   },
                 );
               },
-              icon: Icon(Icons.question_mark))
+              icon: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(
+                    Icons.question_mark,
+                    color: Colors.black,
+                    size: 20,
+                  )))
         ],
         title: Text('Riwayat Order'),
         centerTitle: true,
@@ -97,12 +115,18 @@ class _RevenueSegment extends StatelessWidget {
               Obx(
                 () => Text(
                   _controller.profile.value?.orderCount.toString() ?? '0',
-                  style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w400, color: Colors.white),
+                  style: TextStyle(
+                      fontSize: 20.sp,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.white),
                 ),
               ),
               Text(
                 "Order",
-                style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w300, color: Colors.white),
+                style: TextStyle(
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w300,
+                    color: Colors.white),
               ),
             ],
           ),
@@ -112,12 +136,18 @@ class _RevenueSegment extends StatelessWidget {
               Obx(
                 () => Text(
                   _controller.profile.value?.todayOmzet.toString() ?? '0',
-                  style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w400, color: Colors.white),
+                  style: TextStyle(
+                      fontSize: 20.sp,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.white),
                 ),
               ),
               Text(
                 "Omzet",
-                style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w300, color: Colors.white),
+                style: TextStyle(
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w300,
+                    color: Colors.white),
               ),
             ],
           ),
@@ -127,12 +157,18 @@ class _RevenueSegment extends StatelessWidget {
               Obx(
                 () => Text(
                   _controller.profile.value?.todayIncome.toString() ?? '0',
-                  style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w400, color: Colors.green),
+                  style: TextStyle(
+                      fontSize: 20.sp,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.green),
                 ),
               ),
               Text(
                 "Untuk Driver",
-                style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w300, color: Colors.white),
+                style: TextStyle(
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w300,
+                    color: Colors.white),
               ),
             ],
           ),
@@ -142,12 +178,18 @@ class _RevenueSegment extends StatelessWidget {
               Obx(
                 () => Text(
                   _controller.profile.value?.todayDeposit.toString() ?? '0',
-                  style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w400, color: Colors.yellow),
+                  style: TextStyle(
+                      fontSize: 20.sp,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.yellow),
                 ),
               ),
               Text(
                 "Setoran",
-                style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w300, color: Colors.white),
+                style: TextStyle(
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w300,
+                    color: Colors.white),
               ),
             ],
           ),

@@ -50,17 +50,20 @@ class OrderCard extends StatelessWidget {
                     "#${data.id}",
                     style: TextStyle(
                       fontSize: 12.sp,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.black,
                     ),
                   ),
                   SizedBox(width: 10.w),
                   Flexible(
                     child: Container(
                       child: Text(
-                        TextUtil.formatDate(DateTime.parse(data.createdAt!)) + " WIB",
+                        TextUtil.formatDate(DateTime.parse(data.createdAt!)) +
+                            " WIB",
                         style: TextStyle(
                           fontSize: 12.sp,
-                          fontWeight: FontWeight.w500,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.grey.shade600,
                         ),
                       ),
                     ),
@@ -73,14 +76,14 @@ class OrderCard extends StatelessWidget {
                   text: data.customerName,
                   style: TextStyle(
                     fontSize: 14.sp,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.w400,
                     color: Colors.black,
                   ),
                   children: [
                     TextSpan(
                       text: ' • ',
                       style: TextStyle(
-                        color: Colors.grey.shade500,
+                        color: Colors.black,
                       ),
                     ),
                     TextSpan(text: data.customerAddress),
@@ -111,9 +114,9 @@ class OrderCard extends StatelessWidget {
                 child: Text(
                   statusText,
                   style: TextStyle(
-                    fontSize: 12.sp,
-                    fontWeight: FontWeight.w500,
-                  ),
+                      fontSize: 12.sp,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.grey.shade600),
                 ),
               ),
             ],
