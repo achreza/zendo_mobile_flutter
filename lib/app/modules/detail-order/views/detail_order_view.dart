@@ -17,7 +17,7 @@ class DetailOrderView extends GetView<DetailOrderController> {
         centerTitle: true,
         actions: [
           IconButton(
-            icon: Icon(Icons.download),
+            icon: Icon(Icons.ios_share),
             onPressed: () => controller.downloadInvoice(),
           ),
         ],
@@ -303,9 +303,12 @@ class _ListDestinationSection extends StatelessWidget {
                 children: [
                   Container(
                     margin: EdgeInsets.only(top: 5.h),
-                    child: FaIcon(FontAwesomeIcons.mapLocation, size: 20.w),
+                    child: Image.asset(
+                      'assets/icons/map-marker.png',
+                      width: 22.w,
+                    ),
                   ),
-                  SizedBox(width: 13.w),
+                  SizedBox(width: 9.w),
                   Expanded(
                     child: Container(
                       decoration: BoxDecoration(
@@ -333,7 +336,7 @@ class _ListDestinationSection extends StatelessWidget {
                                 SizedBox(height: 5.h),
                                 Row(
                                   children: [
-                                    Icon(Icons.list_alt, size: 10.w),
+                                    Icon(Icons.notes, size: 10.w),
                                     SizedBox(width: 5.w),
                                     Text(
                                       _controller.data.value!.destinations![idx].note!,
