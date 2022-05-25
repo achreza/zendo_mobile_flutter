@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
+import 'package:zendo_mobile/app/core/utils/share.dart';
 import 'package:zendo_mobile/app/core/values/constants.dart';
 import 'package:zendo_mobile/app/modules/home/controllers/home_controller.dart';
 
@@ -28,8 +29,7 @@ class ProfileView extends GetView<HomeController> {
                 ListTile(
                   title: Text(
                     "Riwayat Order",
-                    style:
-                        TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w400),
+                    style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w400),
                   ),
                   leading: Icon(Icons.history),
                   onTap: () => Get.toNamed('/riwayat-order'),
@@ -37,17 +37,15 @@ class ProfileView extends GetView<HomeController> {
                 ListTile(
                   title: Text(
                     "Hubungi Admin",
-                    style:
-                        TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w400),
+                    style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w400),
                   ),
                   leading: Icon(Icons.headset_mic),
-                  onTap: () {},
+                  onTap: () => ShareUtil.contactAdmin(),
                 ),
                 ListTile(
                   title: Text(
                     "Keluar",
-                    style:
-                        TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w400),
+                    style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w400),
                   ),
                   leading: Icon(Icons.exit_to_app),
                   onTap: () {
@@ -93,20 +91,13 @@ class _RevenueSegment extends StatelessWidget {
                 children: [
                   Obx(
                     () => Text(
-                      _homeController.profile.value?.orderCount.toString() ??
-                          '0',
-                      style: TextStyle(
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.white),
+                      _homeController.profile.value?.orderCount.toString() ?? '0',
+                      style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w400, color: Colors.white),
                     ),
                   ),
                   Text(
                     "Order",
-                    style: TextStyle(
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w300,
-                        color: Colors.white),
+                    style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w300, color: Colors.white),
                   ),
                 ],
               ),
@@ -115,20 +106,13 @@ class _RevenueSegment extends StatelessWidget {
                 children: [
                   Obx(
                     () => Text(
-                      _homeController.profile.value?.todayOmzet.toString() ??
-                          '0',
-                      style: TextStyle(
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.white),
+                      _homeController.profile.value?.todayOmzet.toString() ?? '0',
+                      style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w400, color: Colors.white),
                     ),
                   ),
                   Text(
                     "Omzet",
-                    style: TextStyle(
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w300,
-                        color: Colors.white),
+                    style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w300, color: Colors.white),
                   ),
                 ],
               ),
@@ -137,20 +121,13 @@ class _RevenueSegment extends StatelessWidget {
                 children: [
                   Obx(
                     () => Text(
-                      _homeController.profile.value?.todayIncome.toString() ??
-                          '0',
-                      style: TextStyle(
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.green),
+                      _homeController.profile.value?.todayIncome.toString() ?? '0',
+                      style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w400, color: Colors.green),
                     ),
                   ),
                   Text(
                     "Untuk Driver",
-                    style: TextStyle(
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w300,
-                        color: Colors.white),
+                    style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w300, color: Colors.white),
                   ),
                 ],
               ),
@@ -159,20 +136,13 @@ class _RevenueSegment extends StatelessWidget {
                 children: [
                   Obx(
                     () => Text(
-                      _homeController.profile.value?.todayDeposit.toString() ??
-                          '0',
-                      style: TextStyle(
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.yellow),
+                      _homeController.profile.value?.todayDeposit.toString() ?? '0',
+                      style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w400, color: Colors.yellow),
                     ),
                   ),
                   Text(
                     "Setoran",
-                    style: TextStyle(
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w300,
-                        color: Colors.white),
+                    style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w300, color: Colors.white),
                   ),
                 ],
               ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:zendo_mobile/app/core/utils/share.dart';
 import 'package:zendo_mobile/app/core/utils/text.dart';
 import 'package:zendo_mobile/app/core/values/constants.dart';
 
@@ -17,7 +18,7 @@ class DetailOrderView extends GetView<DetailOrderController> {
         centerTitle: true,
         actions: [
           IconButton(
-            icon: Icon(Icons.download),
+            icon: Icon(Icons.ios_share),
             onPressed: () => controller.downloadInvoice(),
           ),
         ],
@@ -77,7 +78,7 @@ class _CompleteOrderState extends StatelessWidget {
             primary: Colors.red,
             minimumSize: const Size.fromHeight(45),
           ),
-          onPressed: () {},
+          onPressed: () => ShareUtil.contactAdmin(),
           child: Text("Hubungi Admin"),
         ),
       ],
@@ -296,16 +297,21 @@ class _ListDestinationSection extends StatelessWidget {
             shrinkWrap: true,
             itemCount: _controller.data.value!.destinations!.length,
             itemBuilder: (ctx, idx) => ListTile(
-              onTap: () => _controller.onChangeDestinationFee(idx),
+              onTap: _controller.data.value!.status == 'on-going'
+                  ? () => _controller.onChangeDestinationFee(idx)
+                  : null,
               contentPadding: EdgeInsets.zero,
               title: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
                     margin: EdgeInsets.only(top: 5.h),
-                    child: FaIcon(FontAwesomeIcons.mapLocation, size: 20.w),
+                    child: Image.asset(
+                      'assets/icons/map_marker.png',
+                      width: 22.w,
+                    ),
                   ),
-                  SizedBox(width: 13.w),
+                  SizedBox(width: 9.w),
                   Expanded(
                     child: Container(
                       decoration: BoxDecoration(
@@ -333,7 +339,7 @@ class _ListDestinationSection extends StatelessWidget {
                                 SizedBox(height: 5.h),
                                 Row(
                                   children: [
-                                    Icon(Icons.list_alt, size: 10.w),
+                                    Icon(Icons.notes, size: 10.w),
                                     SizedBox(width: 5.w),
                                     Text(
                                       _controller.data.value!.destinations![idx].note!,
