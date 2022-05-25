@@ -339,7 +339,7 @@ class _ListDestinationSection extends StatelessWidget {
                                 SizedBox(height: 5.h),
                                 Row(
                                   children: [
-                                    Icon(Icons.notes, size: 10.w),
+                                    Icon(Icons.list_alt, size: 10.w),
                                     SizedBox(width: 5.w),
                                     Text(
                                       _controller.data.value!.destinations![idx].note!,
