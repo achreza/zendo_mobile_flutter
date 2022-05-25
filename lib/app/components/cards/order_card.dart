@@ -20,7 +20,7 @@ class OrderCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final statusText = data.status == "on-going"
         ? "Dalam Proses"
-        : data.status == "cancel"
+        : data.status == "canceled"
             ? "Dibatalkan"
             : "Selesai";
 
@@ -58,8 +58,7 @@ class OrderCard extends StatelessWidget {
                   Flexible(
                     child: Container(
                       child: Text(
-                        TextUtil.formatDate(DateTime.parse(data.createdAt!)) +
-                            " WIB",
+                        TextUtil.formatDate(DateTime.parse(data.createdAt!)) + " WIB",
                         style: TextStyle(
                           fontSize: 12.sp,
                           fontWeight: FontWeight.w400,
@@ -113,10 +112,7 @@ class OrderCard extends StatelessWidget {
                 ),
                 child: Text(
                   statusText,
-                  style: TextStyle(
-                      fontSize: 12.sp,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.grey.shade600),
+                  style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w500, color: Colors.grey.shade600),
                 ),
               ),
             ],

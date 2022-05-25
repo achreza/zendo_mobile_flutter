@@ -472,7 +472,7 @@ class _TitleSection extends StatelessWidget {
               Text(
                 _controller.data.value!.status == "on-going"
                     ? "Dalam Proses"
-                    : _controller.data.value!.status == "cancel"
+                    : _controller.data.value!.status == "canceled"
                         ? "Dibatalkan"
                         : "Selesai",
                 style: TextStyle(
