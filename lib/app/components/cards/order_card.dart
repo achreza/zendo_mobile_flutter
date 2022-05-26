@@ -21,7 +21,7 @@ class OrderCard extends StatelessWidget {
     final statusText = data.status == "on-going"
         ? "Dalam Proses"
         : data.status == "canceled"
-            ? "Dibatalkan"
+            ? "Batal"
             : "Selesai";
 
     return Container(
