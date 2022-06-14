@@ -20,11 +20,13 @@ class DbService extends GetxService {
 
   UserCredential? getUserCredential() => _userCredentialBox.get(0);
 
-  Future<void> saveAuthToken(String token) async => await _authTokenBox.put(0, token);
+  Future<void> saveAuthToken(String token) async =>
+      await _authTokenBox.put(0, token);
 
   String? getAuthToken() => _authTokenBox.get(0);
 
-  Future<void> saveRefreshToken(String token) async => await _refreshTokenBox.put(0, token);
+  Future<void> saveRefreshToken(String token) async =>
+      await _refreshTokenBox.put(0, token);
 
   String? getRefreshToken() => _refreshTokenBox.get(0);
 
@@ -33,4 +35,9 @@ class DbService extends GetxService {
     await _authTokenBox.delete(0);
     await _refreshTokenBox.delete(0);
   }
+
+  Future<void> deleteAuthToken() async => await _authTokenBox.delete(0);
+  Future<void> deleteRefreshToken() async => await _refreshTokenBox.delete(0);
+  Future<void> deleteUserCredential() async =>
+      await _userCredentialBox.delete(0);
 }

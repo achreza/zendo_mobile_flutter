@@ -17,10 +17,18 @@ dependencies:
   intl: ^0.17.0
   fluttertoast: ^8.0.9
   shimmer_animation: 2.1.0+1
+  path_provider: 2.0.10
+  dio: 4.0.6
+  permission_handler: 9.2.0
+  open_file: 3.2.1
   flutter: 
     sdk: flutter
+  line_icons: ^2.0.1
+  url_launcher: ^6.1.2
+  
 
 dev_dependencies: 
+  icons_launcher: ^1.1.8
   flutter_lints: ^1.0.0
   lints: 1.0.1
   hive_generator: ^1.1.2
@@ -30,9 +38,15 @@ dev_dependencies:
   flutter_test: 
     sdk: flutter
 
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/icons/app_icon.png"
+
 flutter: 
   assets: 
     - assets/
     - assets/images/
+    - assets/icons/
   uses-material-design: true
 

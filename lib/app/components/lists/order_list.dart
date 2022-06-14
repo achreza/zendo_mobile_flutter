@@ -17,6 +17,7 @@ class OrderList extends StatelessWidget {
     return ListView.separated(
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
+      padding: EdgeInsets.symmetric(vertical: kDefaultMargin * 2),
       itemCount: data.length,
       reverse: true,
       itemBuilder: (context, index) => OrderCard(data: data[index]),

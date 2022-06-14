@@ -13,6 +13,7 @@ abstract class Routes {
   static const DETAIL_ORDER = _Paths.DETAIL_ORDER;
   static const DETAIL_ORDER_COMPLETE = _Paths.DETAIL_ORDER_COMPLETE;
   static const CHANGE_ORDER = _Paths.CHANGE_ORDER;
+  static const RIWAYAT_ORDER = _Paths.RIWAYAT_ORDER;
 }
 
 abstract class _Paths {
@@ -23,4 +24,5 @@ abstract class _Paths {
   static const DETAIL_ORDER = '/detail-order';
   static const DETAIL_ORDER_COMPLETE = '/detail-order/complete';
   static const CHANGE_ORDER = '/change-order';
+  static const RIWAYAT_ORDER = '/riwayat-order';
 }

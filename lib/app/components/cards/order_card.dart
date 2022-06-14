@@ -18,10 +18,10 @@ class OrderCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final statusText = data.status! == "on-going"
+    final statusText = data.status == "on-going"
         ? "Dalam Proses"
-        : data.status! == "cancel"
-            ? "Dibatalkan"
+        : data.status == "canceled"
+            ? "Batal"
             : "Selesai";
 
     return Container(
@@ -46,21 +46,24 @@ class OrderCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Flexible(
-                    child: Text(
-                      "#${data.id}",
-                      style: TextStyle(
-                        fontSize: 12.sp,
-                        fontWeight: FontWeight.w500,
-                      ),
+                  Text(
+                    "#${data.id}",
+                    style: TextStyle(
+                      fontSize: 12.sp,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.black,
                     ),
                   ),
+                  SizedBox(width: 10.w),
                   Flexible(
-                    child: Text(
-                      TextUtil.formatDate(DateTime.parse(data.createdAt!)) + " WIB",
-                      style: TextStyle(
-                        fontSize: 12.sp,
-                        fontWeight: FontWeight.w500,
+                    child: Container(
+                      child: Text(
+                        TextUtil.formatDate(DateTime.parse(data.createdAt!)) + " WIB",
+                        style: TextStyle(
+                          fontSize: 12.sp,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.grey.shade600,
+                        ),
                       ),
                     ),
                   ),
@@ -72,14 +75,14 @@ class OrderCard extends StatelessWidget {
                   text: data.customerName,
                   style: TextStyle(
                     fontSize: 14.sp,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.w400,
                     color: Colors.black,
                   ),
                   children: [
                     TextSpan(
                       text: ' • ',
                       style: TextStyle(
-                        color: Colors.grey.shade500,
+                        color: Colors.black,
                       ),
                     ),
                     TextSpan(text: data.customerAddress),
@@ -109,10 +112,7 @@ class OrderCard extends StatelessWidget {
                 ),
                 child: Text(
                   statusText,
-                  style: TextStyle(
-                    fontSize: 12.sp,
-                    fontWeight: FontWeight.w500,
-                  ),
+                  style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w500, color: Colors.grey.shade600),
                 ),
               ),
             ],

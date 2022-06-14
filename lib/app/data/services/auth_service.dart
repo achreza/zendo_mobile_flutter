@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/status/http_status.dart';
+import 'package:zendo_mobile/app/data/dto/request/logout_request.dart';
 import 'package:zendo_mobile/app/data/dto/response/login_response.dart';
 import 'package:zendo_mobile/app/data/models/profile.dart';
 import 'package:zendo_mobile/app/data/models/user_credential.dart';
@@ -18,7 +19,8 @@ class AuthService extends GetxService {
 
   Future<AuthService> init() async => this;
 
-  get isLoggedIn => dbService.getUserCredential() != null && dbService.getAuthToken() != null;
+  get isLoggedIn =>
+      dbService.getUserCredential() != null && dbService.getAuthToken() != null;
 
   Future<void> login(String phoneNumber, String password) async {
     final request = LoginRequest(phone_number: phoneNumber, password: password);
@@ -37,7 +39,8 @@ class AuthService extends GetxService {
     final LoginResponse loginResponse = LoginResponse.fromJson(response.body);
     final data = loginResponse.data;
 
-    final user = UserCredential(phoneNumber: data.phone_number, token: data.token);
+    final user =
+        UserCredential(phoneNumber: data.phone_number, token: data.token);
     final token = data.token;
 
     await Future.wait([
@@ -62,5 +65,19 @@ class AuthService extends GetxService {
     final data = response.body['data'];
 
     return Profile.fromJson(data);
+  }
+
+  Future<void> logout(LogoutRequest request) async {
+    final response = await authProvider.logout(request);
+
+    switch (response.statusCode) {
+      case HttpStatus.unauthorized:
+        throw Exception('Logout Gagal');
+      case HttpStatus.notFound:
+        throw Exception('Logout Gagal');
+      case null:
+        throw Exception('Gagal menghubungkan ke server');
+      default:
+    }
   }
 }

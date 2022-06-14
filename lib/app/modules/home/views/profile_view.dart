@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
+import 'package:zendo_mobile/app/core/utils/share.dart';
 import 'package:zendo_mobile/app/core/values/constants.dart';
 import 'package:zendo_mobile/app/modules/home/controllers/home_controller.dart';
 
@@ -31,7 +32,7 @@ class ProfileView extends GetView<HomeController> {
                     style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w400),
                   ),
                   leading: Icon(Icons.history),
-                  onTap: () => Get.toNamed('/history'),
+                  onTap: () => Get.toNamed('/riwayat-order'),
                 ),
                 ListTile(
                   title: Text(
@@ -39,7 +40,7 @@ class ProfileView extends GetView<HomeController> {
                     style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w400),
                   ),
                   leading: Icon(Icons.headset_mic),
-                  onTap: () {},
+                  onTap: () => ShareUtil.contactAdmin(),
                 ),
                 ListTile(
                   title: Text(
@@ -47,7 +48,9 @@ class ProfileView extends GetView<HomeController> {
                     style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w400),
                   ),
                   leading: Icon(Icons.exit_to_app),
-                  onTap: () {},
+                  onTap: () {
+                    controller.logout();
+                  },
                 ),
               ],
             ).toList(),
