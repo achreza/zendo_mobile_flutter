@@ -339,7 +339,7 @@ class _ListDestinationSection extends StatelessWidget {
                                 SizedBox(height: 5.h),
                                 Row(
                                   children: [
-                                    Icon(Icons.notes, size: 10.w),
+                                    Icon(Icons.list_alt, size: 10.w),
                                     SizedBox(width: 5.w),
                                     Text(
                                       _controller.data.value!.destinations![idx].note!,
@@ -472,8 +472,8 @@ class _TitleSection extends StatelessWidget {
               Text(
                 _controller.data.value!.status == "on-going"
                     ? "Dalam Proses"
-                    : _controller.data.value!.status == "cancel"
-                        ? "Dibatalkan"
+                    : _controller.data.value!.status == "canceled"
+                        ? "Batal"
                         : "Selesai",
                 style: TextStyle(
                   fontSize: 24.sp,
